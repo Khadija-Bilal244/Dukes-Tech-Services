@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3 mt-6">
               <a 
-                href="https://www.facebook.com/dukestechservices" 
+                href="https://www.facebook.com/DukesTechServices" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="rounded-lg bg-white/5 px-3 py-2 hover:bg-white/10 transition-colors hover:text-white text-sm"
