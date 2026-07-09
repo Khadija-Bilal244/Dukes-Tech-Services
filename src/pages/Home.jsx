@@ -2,7 +2,10 @@ import Seo from "../components/Seo.jsx";
 import Hero from "../components/Hero.jsx";
 import Slogan from "../components/Slogan.jsx";
 import Workflow from "../components/Workflow.jsx";
-
+import Services from "../components/Services.jsx";
+import WhyChooseUs from "../components/WhyChosseUs.jsx";
+import MovingBanner from "../components/MovingBanner.jsx";
+import Sectors from "../components/Sectors.jsx";
 export default function Home() {
   return (
     <>
@@ -14,6 +17,10 @@ export default function Home() {
       <Hero />
       <Slogan />
       <Workflow />
+      <Services/>
+      <WhyChooseUs/>
+      <MovingBanner/>
+      <Sectors/>
     </>
   );
 }

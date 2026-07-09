@@ -31,35 +31,35 @@ export default function Navbar() {
           : "bg-[#0E2A43] border-b border-white/10"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 py-2.5 sm:py-3">
         {/* Logo - Larger with scale effect */}
         <a 
           href="#home" 
           className="flex shrink-0 items-center transition-transform duration-300 hover:scale-110 active:scale-95"
         >
-          <div className="rounded-xl bg-white p-2 shadow-lg">
+          <div className="rounded-xl bg-white p-1.5 sm:p-2 shadow-lg">
             <img 
               src={logo} 
               alt="Dukes Tech Services" 
-              className="h-16 w-auto sm:h-20 md:h-24" 
+              className="h-12 w-auto sm:h-14 md:h-16 lg:h-20" 
             />
           </div>
         </a>
 
         {/* Desktop nav with white text */}
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 lg:gap-1 md:flex">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="rounded-lg px-4 py-2 text-lg font-bold text-white/80 transition-all hover:bg-white/10 hover:text-white font-sans"
+              className="rounded-lg px-3 lg:px-4 py-2 text-sm lg:text-base font-bold text-white/100 transition-all hover:bg-white/10 hover:text-white font-sans"
             >
               {item.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="ml-4 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
+            className="ml-3 lg:ml-4 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-5 lg:px-6 py-2 lg:py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
           >
             Get in Touch
           </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
               key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors font-sans"
+              className="block rounded-lg px-4 py-3 text-base font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors font-sans"
             >
               {item.label}
             </a>
@@ -96,7 +96,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-3 block rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-3 text-center text-lg font-semibold text-white font-sans"
+            className="mt-3 block rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-3 text-center text-base font-semibold text-white font-sans"
           >
             Get in Touch
           </a>

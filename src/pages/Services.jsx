@@ -1,4 +1,5 @@
 import Seo from "../components/Seo.jsx";
+import ServicesSection from "../components/Services.jsx";
 
 const categories = [
   {
@@ -91,64 +92,7 @@ export default function Services() {
         path="/services"
       />
 
-      {/* page header */}
-      <section className="relative bg-navy overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-24 bg-gold" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-14">
-          <p className="font-mono text-xs uppercase tracking-widest text-white/60 mb-3">Home / Services</p>
-          <h1 className="font-display text-4xl lg:text-5xl font-semibold text-white">Our Services</h1>
-        </div>
-      </section>
-
-      {/* intro */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-12 items-start">
-          <div className="lg:col-span-1">
-            <p className="font-mono text-xs uppercase tracking-widest text-royalblue mb-3">What we do</p>
-            <h2 className="font-display text-3xl font-semibold text-navy leading-tight">
-              Eight services.<br />One team.
-            </h2>
-          </div>
-          <div className="lg:col-span-2">
-            <p className="text-charcoal/70 leading-relaxed">
-              As a pioneering IT company, our unwavering commitment lies in providing an array of cutting-edge
-              services to fulfill your diverse technological requirements. From software development and web
-              development to mobile app development, IT consulting, cloud services, and cybersecurity, we offer
-              a comprehensive suite of solutions.
-            </p>
-            <p className="text-charcoal/70 leading-relaxed mt-4">
-              Our team of highly skilled professionals combines their expertise with a customer-centric approach
-              to deliver bespoke solutions that optimize your business operations, elevate your online presence,
-              and safeguard your digital assets. By partnering with us, you harness the full potential of
-              technology to drive your business towards resounding success.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* services grouped by category */}
-      <section id="services" className="bg-paper py-20 border-t border-charcoal/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          {categories.map((cat) => (
-            <CategoryBlock key={cat.name} cat={cat} />
-          ))}
-        </div>
-      </section>
-
-      {/* cta */}
-      <section className="bg-navy py-14">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-white font-display text-xl lg:text-2xl font-semibold text-center sm:text-left">
-            Not sure which service fits? Get a free consultation.
-          </p>
-          <a
-            href="mailto:info.dukestech@gmail.com"
-            className="bg-gold text-charcoal font-semibold px-7 py-3.5 rounded-full hover:bg-white transition-colors duration-300 whitespace-nowrap"
-          >
-            Talk to us
-          </a>
-        </div>
-      </section>
+      <ServicesSection />
     </>
   );
 }
