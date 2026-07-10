@@ -1,5 +1,4 @@
-// Slogan.jsx
-// Clean centered quote with typewriter effect - Equal heights
+
 import { useState, useEffect } from "react";
 import { Quote } from "lucide-react";
 
@@ -43,7 +42,7 @@ export default function Slogan() {
   }, []);
 
   return (
-    <section className="bg-[#d0e6cf] px-5 py-16 sm:py-20 sm:px-8 rounded-[100px]">
+    <section className="bg-[#d0e6cf] px-5 py-6 sm:py-20 sm:px-8 rounded-[100px]">
       <div className="mx-auto max-w-4xl text-center">
         {/* Decorative line */}
         <div className="flex justify-center gap-3 mb-6 sm:mb-8">

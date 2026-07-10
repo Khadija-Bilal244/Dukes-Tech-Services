@@ -1,4 +1,4 @@
-// Navbar.jsx - With React Router
+// Navbar.jsx - Logo on Left, Menu Centered
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -34,8 +34,8 @@ export default function Navbar() {
           : "bg-[#0E2A43] border-b border-white/10"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 py-2.5 sm:py-3">
-        {/* Logo - Separate flex container */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 py-3 sm:py-3.5">
+        {/* Logo - Fixed on the LEFT */}
         <div className="flex items-center flex-shrink-0">
           <Link
             to="/"
@@ -45,20 +45,20 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Dukes Tech Services"
-              className="w-32 sm:w-40 md:w-48 lg:w-56 h-auto object-contain"
+              className="w-36 sm:w-44 md:w-52 lg:w-60 h-auto object-contain"
             />
           </Link>
         </div>
 
-        {/* Desktop Menu - Separate flex container, centered */}
-        <nav className="hidden md:flex items-center justify-center flex-1 gap-1 lg:gap-1.5 text-lg font-sans font-semibold">
+        {/* Desktop Menu - Centered in the remaining space */}
+        <nav className="hidden md:flex items-center justify-center flex-1 gap-1.5 lg:gap-2">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.label}
               to={item.href}
               onClick={closeMenu}
               className={({ isActive }) =>
-                `rounded-lg px-3 lg:px-4 py-2 text-md lg:text-base font-bold transition-all hover:bg-white/10 hover:text-white font-sans hover:scale-105 ${
+                `rounded-lg px-4 lg:px-6 py-2.5 lg:py-3 text-lg lg:text-xl font-bold transition-all hover:bg-white/10 hover:text-white font-sans hover:scale-105 ${
                   isActive 
                     ? "text-white bg-white/10" 
                     : "text-white/100"
@@ -70,29 +70,29 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Get in Touch Button - Separate flex container */}
+        {/* Get in Touch Button - Fixed on the RIGHT */}
         <div className="hidden md:flex items-center flex-shrink-0">
           <Link
             to="/contact"
             onClick={closeMenu}
-            className="rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-5 lg:px-6 py-2 lg:py-2.5 text-md font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
+            className="rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 lg:px-8 py-2.5 lg:py-3 text-base lg:text-lg font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
           >
             Get in Touch
           </Link>
         </div>
 
-        {/* Mobile toggle - white icon */}
+        {/* Mobile toggle */}
         <button
           onClick={() => setOpen((v) => !v)}
           className="rounded-lg p-2 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1CA7B8] md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile nav - navy background */}
+      {/* Mobile nav */}
       <nav
         className={`overflow-hidden border-t border-white/10 bg-[#0E2A43] transition-all duration-300 md:hidden ${
           open ? "max-h-[500px] py-4 opacity-100" : "max-h-0 py-0 opacity-0"
@@ -105,7 +105,7 @@ export default function Navbar() {
               to={item.href}
               onClick={closeMenu}
               className={({ isActive }) =>
-                `block rounded-lg px-4 py-3 text-base font-semibold transition-colors font-sans ${
+                `block rounded-lg px-4 py-3.5 text-lg font-semibold transition-colors font-sans ${
                   isActive
                     ? "text-white bg-white/10"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
@@ -118,7 +118,7 @@ export default function Navbar() {
           <Link
             to="/contact"
             onClick={closeMenu}
-            className="mt-3 block rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-3 text-center text-base font-semibold text-white font-sans"
+            className="mt-3 block rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-3.5 text-center text-lg font-semibold text-white font-sans"
           >
             Get in Touch
           </Link>
