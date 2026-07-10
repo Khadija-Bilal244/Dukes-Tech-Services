@@ -114,7 +114,7 @@ export default function Sectors() {
             <span className="inline-block h-1 w-16 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-8 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-6 text-[#0E2A43]/60 max-w-2xl mx-auto font-sans text-base leading-relaxed">
+          <p className="mt-6 text-[black]/100 max-w-2xl mx-auto font-sans text-base leading-relaxed">
             We provide tailored technology solutions across diverse industries, 
             helping businesses thrive in the digital age.
           </p>
@@ -156,7 +156,7 @@ export default function Sectors() {
                   <h3 className={`font-sans text-xl font-bold ${sector.textColor} transition-colors duration-300`}>
                     {sector.title}
                   </h3>
-                  <p className="mt-2 font-sans text-sm text-[#0E2A43]/60 leading-relaxed">
+                  <p className="mt-2 font-sans text-sm text-[black]/100 leading-relaxed">
                     {sector.description}
                   </p>
                 </div>

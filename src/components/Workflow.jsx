@@ -62,7 +62,7 @@ export default function Workflow() {
             <span className="inline-block h-1 w-16 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-8 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-6 text-[#0E2A43]/60 max-w-2xl mx-auto font-sans text-base leading-relaxed">
+          <p className="mt-6 text-[#0E2A43]/70 max-w-2xl mx-auto font-sans text-base leading-relaxed">
             Our IT company employs a meticulous and streamlined approach to provide bespoke 
             solutions that perfectly align with clients' requirements.
           </p>
@@ -88,14 +88,15 @@ export default function Workflow() {
                 </div>
               </div>
 
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-b from-[#F2FAFB] to-white">
+              {/* Image - with very light grey background */}
+              <div className="relative h-48 overflow-hidden bg-[#F5F6F8]">
                 <img
                   src={step.image}
                   alt={step.title}
                   className="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent" />
+                {/* Subtle gradient overlay at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
               </div>
 
               {/* Content */}
@@ -106,7 +107,7 @@ export default function Workflow() {
                 >
                   {step.title}
                 </h3>
-                <p className="font-sans text-sm text-[#0E2A43]/60 leading-relaxed">
+                <p className="font-sans text-sm text-[#0E2A43]/70 leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -118,6 +119,22 @@ export default function Workflow() {
               />
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex flex-wrap items-center justify-center gap-4 rounded-2xl bg-[#F2FAFB] px-8 py-5 border border-[#1CA7B8]/10">
+            <span className="font-sans text-sm font-semibold text-[#0E2A43]">
+              🚀 Ready to transform your business?
+            </span>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
+            >
+              Start Your Project
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

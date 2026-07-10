@@ -6,6 +6,7 @@ import Services from "../components/Services.jsx";
 import WhyChooseUs from "../components/WhyChosseUs.jsx";
 import MovingBanner from "../components/MovingBanner.jsx";
 import Sectors from "../components/Sectors.jsx";
+import Team from "../components/Team.jsx";
 export default function Home() {
   return (
     <>
@@ -21,6 +22,7 @@ export default function Home() {
       <WhyChooseUs/>
       <MovingBanner/>
       <Sectors/>
+      <Team/>
     </>
   );
 }

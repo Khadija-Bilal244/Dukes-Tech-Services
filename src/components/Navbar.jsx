@@ -1,14 +1,15 @@
-// Navbar.jsx
+// Navbar.jsx - With React Router
 import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo-actual.png";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Sectors", href: "#sectors" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Sectors", href: "/sectors" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -23,6 +24,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = () => setOpen(false);
+
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
@@ -32,38 +35,51 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 py-2.5 sm:py-3">
-        {/* Logo - Larger with scale effect */}
-        <a 
-          href="#home" 
-          className="flex shrink-0 items-center transition-transform duration-300 hover:scale-110 active:scale-95"
-        >
-          <div className="rounded-xl bg-white p-1.5 sm:p-2 shadow-lg">
-            <img 
-              src={logo} 
-              alt="Dukes Tech Services" 
-              className="h-12 w-auto sm:h-14 md:h-16 lg:h-20" 
+        {/* Logo - Separate flex container */}
+        <div className="flex items-center flex-shrink-0">
+          <Link
+            to="/"
+            onClick={closeMenu}
+            className="flex items-center transition-all duration-300 ease-out hover:scale-110 hover:brightness-100 hover:contrast-125 hover:drop-shadow-[0_0_18px_rgba(28,167,184,0.65)] active:scale-95"
+          >
+            <img
+              src={logo}
+              alt="Dukes Tech Services"
+              className="w-32 sm:w-40 md:w-48 lg:w-56 h-auto object-contain"
             />
-          </div>
-        </a>
+          </Link>
+        </div>
 
-        {/* Desktop nav with white text */}
-        <nav className="hidden items-center gap-0.5 lg:gap-1 md:flex">
+        {/* Desktop Menu - Separate flex container, centered */}
+        <nav className="hidden md:flex items-center justify-center flex-1 gap-1 lg:gap-1.5 text-lg font-sans font-semibold">
           {NAV_ITEMS.map((item) => (
-            <a
+            <NavLink
               key={item.label}
-              href={item.href}
-              className="rounded-lg px-3 lg:px-4 py-2 text-sm lg:text-base font-bold text-white/100 transition-all hover:bg-white/10 hover:text-white font-sans"
+              to={item.href}
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `rounded-lg px-3 lg:px-4 py-2 text-md lg:text-base font-bold transition-all hover:bg-white/10 hover:text-white font-sans hover:scale-105 ${
+                  isActive 
+                    ? "text-white bg-white/10" 
+                    : "text-white/100"
+                }`
+              }
             >
               {item.label}
-            </a>
+            </NavLink>
           ))}
-          <a
-            href="#contact"
-            className="ml-3 lg:ml-4 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-5 lg:px-6 py-2 lg:py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
+        </nav>
+
+        {/* Get in Touch Button - Separate flex container */}
+        <div className="hidden md:flex items-center flex-shrink-0">
+          <Link
+            to="/contact"
+            onClick={closeMenu}
+            className="rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-5 lg:px-6 py-2 lg:py-2.5 text-md font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 transition-all hover:scale-105 hover:shadow-[#1CA7B8]/40 font-sans"
           >
             Get in Touch
-          </a>
-        </nav>
+          </Link>
+        </div>
 
         {/* Mobile toggle - white icon */}
         <button
@@ -84,22 +100,28 @@ export default function Navbar() {
       >
         <div className="px-5 space-y-1">
           {NAV_ITEMS.map((item) => (
-            <a
+            <NavLink
               key={item.label}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-base font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors font-sans"
+              to={item.href}
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `block rounded-lg px-4 py-3 text-base font-semibold transition-colors font-sans ${
+                  isActive
+                    ? "text-white bg-white/10"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                }`
+              }
             >
               {item.label}
-            </a>
+            </NavLink>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
+          <Link
+            to="/contact"
+            onClick={closeMenu}
             className="mt-3 block rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-3 text-center text-base font-semibold text-white font-sans"
           >
             Get in Touch
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

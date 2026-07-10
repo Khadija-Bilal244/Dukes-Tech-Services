@@ -43,7 +43,7 @@ export default function Slogan() {
   }, []);
 
   return (
-    <section className="bg-[#F2FAFB] px-5 py-16 sm:py-20 sm:px-8">
+    <section className="bg-[#d0e6cf] px-5 py-16 sm:py-20 sm:px-8 rounded-[100px]">
       <div className="mx-auto max-w-4xl text-center">
         {/* Decorative line */}
         <div className="flex justify-center gap-3 mb-6 sm:mb-8">

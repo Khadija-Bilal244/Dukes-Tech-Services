@@ -1,92 +1,127 @@
-import { MapPin, Mail, Phone } from "lucide-react";
+// Footer.jsx - With Lucide Icons
+import logo from "../assets/logo-actual.png";
+import { MapPin, Mail, Phone, ChevronRight } from "lucide-react";
+
+const SERVICES = [
+  "Web Development & Design",
+  "Graphic Design",
+  "Video Editing & Production",
+  "SEO (Search Engine Optimization)",
+  "Digital Marketing & Ads",
+  "Social Media Marketing & Management",
+  "Canva Design Services",
+  "Software Development",
+];
+
+const QUICK_LINKS = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Sectors", href: "#sectors" },
+  { name: "Contact", href: "#contact" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0E2A43] text-white/70 pt-20 pb-8">
+    <footer className="bg-[#0E2A43] text-white/70 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div>
-            <span className="font-sans text-2xl font-bold text-white">
-              DUKES<span className="text-[#1CA7B8]">TECH</span>
-            </span>
-            <p className="text-sm mt-4 leading-relaxed text-white/50 max-w-xs font-sans">
-              Empowering businesses through cutting-edge technology solutions that drive growth and digital transformation.
-            </p>
-            <div className="flex gap-3 mt-6">
-              <a 
-                href="https://www.facebook.com/DukesTechServices" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="rounded-lg bg-white/5 px-3 py-2 hover:bg-white/10 transition-colors hover:text-white text-sm"
-              >
-                Facebook
-              </a>
-              <a 
-                href="https://www.instagram.com/dukestechservices" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="rounded-lg bg-white/5 px-3 py-2 hover:bg-white/10 transition-colors hover:text-white text-sm"
-              >
-                Instagram
-              </a>
+        {/* Top Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+          
+          {/* Logo & Slogan */}
+          <div className="lg:col-span-3">
+            <a href="#home" className="block mb-4">
+              <div className="rounded-xl bg-white p-2 shadow-lg inline-block transition-transform hover:scale-105">
+                <img 
+                  src={logo} 
+                  alt="Dukes Tech Services" 
+                  className="h-12 w-auto sm:h-14 md:h-16" 
+                />
+              </div>
+            </a>
+            <div className="mt-3">
+              <p className="font-sans text-lg font-bold text-white leading-tight">
+                Smart Tech, <span className="text-[#1CA7B8]">Smarter Future</span>
+              </p>
+              <p className="font-sans text-sm text-white/50 mt-1">
+                Where Ideas Meet Technology
+              </p>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">Quick Links</p>
-            <ul className="space-y-2.5">
-              <li><a href="#home" className="text-sm hover:text-white transition-colors duration-300 font-sans">Home</a></li>
-              <li><a href="#about" className="text-sm hover:text-white transition-colors duration-300 font-sans">About Us</a></li>
-              <li><a href="#services" className="text-sm hover:text-white transition-colors duration-300 font-sans">Services</a></li>
-              <li><a href="#sectors" className="text-sm hover:text-white transition-colors duration-300 font-sans">Sectors</a></li>
-              <li><a href="#contact" className="text-sm hover:text-white transition-colors duration-300 font-sans">Contact</a></li>
-            </ul>
+          {/* Services */}
+          <div className="lg:col-span-6">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+              Our Services
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
+              {SERVICES.map((service, index) => (
+                <a
+                  key={index}
+                  href="#services"
+                  className="group flex items-start gap-2.5 py-1.5 px-2 rounded-lg hover:bg-white/5 transition-all duration-300 hover:translate-x-1"
+                >
+                  <span className="text-[#1CA7B8] text-lg leading-none mt-0.5">•</span>
+                  <span className="font-sans text-sm text-white/70 group-hover:text-white transition-colors duration-300">
+                    {service}
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">Contact Us</p>
-            <address className="not-italic space-y-3 text-sm">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-[#1CA7B8] mt-0.5 flex-shrink-0" />
-                <span className="text-white/50 font-sans">The Mall Road, Lahore, Pakistan</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
-                <a href="mailto:info.dukestech@gmail.com" className="hover:text-white transition-colors duration-300 text-white/50 font-sans">
-                  info.dukestech@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
-                <a href="tel:+923009459653" className="hover:text-white transition-colors duration-300 text-white/50 font-sans">
-                  +92-300-9459653
-                </a>
-              </div>
-            </address>
-          </div>
+          {/* Quick Links & Contact */}
+          <div className="lg:col-span-3">
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+                Quick Links
+              </h4>
+              <ul className="space-y-2">
+                {QUICK_LINKS.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="group flex items-center gap-2 font-sans text-sm text-white/60 hover:text-white transition-all duration-300 hover:translate-x-1"
+                    >
+                      <ChevronRight className="h-3 w-3 text-[#1CA7B8]" />
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Newsletter */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">Stay Updated</p>
-            <p className="text-sm text-white/50 mb-4 font-sans">Subscribe to our newsletter for the latest updates</p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#1CA7B8]/50 font-sans"
-              />
-              <button className="rounded-lg bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-4 py-2.5 text-sm font-semibold text-white hover:scale-105 transition-transform font-sans whitespace-nowrap">
-                Subscribe
-              </button>
-            </form>
+            <div className="mt-6">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+                Contact Info
+              </h4>
+              <address className="not-italic space-y-2.5">
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-4 w-4 text-[#1CA7B8] mt-0.5 flex-shrink-0" />
+                  <span className="font-sans text-sm text-white/50">The Mall Road, Lahore, Pakistan</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
+                  <a href="mailto:info.dukestech@gmail.com" className="font-sans text-sm text-white/50 hover:text-white transition-colors duration-300">
+                    info.dukestech@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
+                  <a href="tel:+923009459653" className="font-sans text-sm text-white/50 hover:text-white transition-colors duration-300">
+                    +92-300-9459653
+                  </a>
+                </div>
+              </address>
+            </div>
           </div>
         </div>
 
-        <div className="mt-16 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/30">
-          <p className="font-sans">© {new Date().getFullYear()} Dukes Tech Services. All rights reserved.</p>
+        {/* Bottom Bar */}
+        <div className="mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/30">
+          <p className="font-sans">
+            © {new Date().getFullYear()} Dukes Tech Services. All rights reserved.
+          </p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white/60 transition-colors font-sans">Privacy Policy</a>
             <a href="#" className="hover:text-white/60 transition-colors font-sans">Terms of Service</a>

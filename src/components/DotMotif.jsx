@@ -52,8 +52,8 @@ export default function DotMotif({ className = "" }) {
           y2="95"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#1CA7B8" />
-          <stop offset="1" stopColor="#0E2A43" />
+          <stop stopColor="#1ca6b858" />
+          <stop offset="1" stopColor="#0b5ea8" />
         </linearGradient>
       </defs>
     </svg>
