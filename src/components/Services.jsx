@@ -1,5 +1,5 @@
 // Services.jsx
-// Modern services section with independent expandable categories using index-based state
+// Modern services section with exclusive expandable categories - only one open at a time
 import { useState } from "react";
 import { 
   ChevronDown, 
@@ -142,19 +142,12 @@ const SERVICES_DATA = [
 ];
 
 export default function Services() {
-  // Use a Set of indices so multiple cards can be expanded independently
-  const [expandedIndices, setExpandedIndices] = useState(new Set());
+  // Store only the index of the expanded service (one at a time)
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const toggleExpand = (index) => {
-    setExpandedIndices((prev) => {
-      const next = new Set(prev);
-      if (next.has(index)) {
-        next.delete(index);
-      } else {
-        next.add(index);
-      }
-      return next;
-    });
+    // If clicking the same service, close it; otherwise open the new one
+    setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   return (
@@ -181,7 +174,7 @@ export default function Services() {
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-6 items-start">
           {SERVICES_DATA.map((service, index) => {
-            const expanded = expandedIndices.has(index);
+            const expanded = expandedIndex === index;
             const Icon = service.icon;
 
             return (
@@ -189,7 +182,7 @@ export default function Services() {
                 key={service.id}
                 className={`group bg-white rounded-2xl border transition-all duration-300 hover:shadow-xl ${
                   expanded 
-                    ? "border-[#1CA7B8]/30 shadow-xl" 
+                    ? "border-[#1CA7B8] shadow-xl shadow-[#1CA7B8]/10" 
                     : "border-[#0E2A43]/10 hover:shadow-lg"
                 }`}
               >
@@ -202,7 +195,7 @@ export default function Services() {
                     {/* Icon */}
                     <div className={`flex-shrink-0 h-12 w-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                       expanded 
-                        ? "bg-gradient-to-br from-[#1CA7B8] to-[#0E2A43] text-white shadow-lg shadow-[#1CA7B8]/25" 
+                        ? "bg-gradient-to-br from-[#1CA7B8] to-[#0E2A43] text-white shadow-lg shadow-[#1CA7B8]/40" 
                         : "bg-[#F2FAFB] text-[#1CA7B8] group-hover:bg-gradient-to-br group-hover:from-[#1CA7B8] group-hover:to-[#0E2A43] group-hover:text-white"
                     }`}>
                       <Icon className="h-6 w-6" />
@@ -223,7 +216,7 @@ export default function Services() {
                           }`} />
                         </span>
                       </div>
-                      <p className="mt-1 font-sans text-sm text-[black]/100 leading-relaxed">
+                      <p className="mt-1 font-sans text-base text-[black]/100 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
@@ -241,10 +234,16 @@ export default function Services() {
                       {service.subServices.map((sub, subIndex) => (
                         <div
                           key={subIndex}
-                          className="flex items-start gap-2.5 p-2.5 rounded-lg hover:bg-[#F2FAFB] transition-colors group/sub"
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#F2FAFB] transition-all duration-300 group/sub"
                         >
-                          <CheckCircle className="h-4 w-4 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-transform group-hover/sub:scale-110" />
-                          <span className="font-sans text-sm text-[#0E2A43]/80 leading-relaxed">
+                          <CheckCircle className={`h-5 w-5 flex-shrink-0 mt-0.5 transition-all duration-300 ${
+                            expanded 
+                              ? "text-[#1CA7B8] group-hover/sub:text-[#0E2A43] scale-110" 
+                              : "text-[#1CA7B8] group-hover/sub:text-[#0E2A43]"
+                          }`} />
+                          <span className={`font-sans text-base leading-relaxed transition-colors duration-300 ${
+                            expanded ? "text-[#0E2A43] font-medium" : "text-[#0E2A43]/80 group-hover/sub:text-[#0E2A43]"
+                          }`}>
                             {sub}
                           </span>
                         </div>
