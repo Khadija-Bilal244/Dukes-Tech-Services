@@ -165,7 +165,7 @@ export default function Services() {
             <span className="inline-block h-1 w-16 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-8 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-6 text-[black]/100 max-w-2xl mx-auto font-sans text-base leading-relaxed">
+          <p className="mt-6 text-[black]/100 max-w-2xl mx-auto font-sans text-lg leading-relaxed">
             Comprehensive technology solutions designed to help your business grow, 
             innovate, and succeed in the digital landscape.
           </p>
