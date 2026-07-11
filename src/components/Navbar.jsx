@@ -1,4 +1,4 @@
-// Navbar.jsx - Logo on Left, Menu Centered
+// Navbar.jsx - Logo on Left (Desktop) / Logo Centered (Mobile)
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -30,13 +30,13 @@ export default function Navbar() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl border-b border-[#0E2A43]/10 shadow-xl"
+          ? "bg-white/100 backdrop-blur-xl border-b border-[#0E2A43]/10 shadow-xl"
           : "bg-white border-b border-[#0E2A43]/10"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 py-2 sm:py-2.5">
-        {/* Logo - Fixed on the LEFT */}
-        <div className="flex items-center flex-shrink-0">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-9 md:px-10 py-2 sm:py-2.5">
+        {/* Logo - Left on Desktop, Hidden on Mobile (we'll show centered logo below) */}
+        <div className="hidden md:flex items-center flex-shrink-0">
           <Link
             to="/"
             onClick={closeMenu}
@@ -45,7 +45,22 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Dukes Tech Services"
-              className="w-28 sm:w-32 md:w-36 lg:w-40 h-auto object-contain"
+              className="w-28 h-20 sm:w-36 md:w-38 lg:w-40 object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Mobile Centered Logo - Visible only on mobile */}
+        <div className="flex md:hidden items-center justify-center flex-1">
+          <Link
+            to="/"
+            onClick={closeMenu}
+            className="flex items-center transition-all duration-300 ease-out hover:scale-110 hover:brightness-120 hover:contrast-125 hover:drop-shadow-[0_0_18px_rgba(28,167,184,0.65)] active:scale-95"
+          >
+            <img
+              src={logo}
+              alt="Dukes Tech Services"
+              className="w-28 h-20 object-contain"
             />
           </Link>
         </div>
@@ -70,7 +85,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Get in Touch Button - Fixed on the RIGHT */}
+        {/* Get in Touch Button - Fixed on the RIGHT (Desktop only) */}
         <div className="hidden md:flex items-center flex-shrink-0">
           <Link
             to="/contact"

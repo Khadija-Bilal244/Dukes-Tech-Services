@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="IT Solutions in Lahore"
+        title="Dukes Tech"
         description="Dukes Tech Services delivers web development, e-commerce, graphic design, SEO, social media marketing, IT consulting, and infrastructure services for businesses in Lahore and beyond."
         path="/"
       />

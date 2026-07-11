@@ -62,7 +62,7 @@ export default function Workflow() {
             <span className="inline-block h-1 w-16 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-8 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-6 text-[#0E2A43]/70 max-w-2xl mx-auto font-sans text-base leading-relaxed">
+          <p className="mt-6 text-[#0E2A43]/80 max-w-2xl mx-auto font-sans text-lg font-semibold leading-relaxed">
             Our IT company employs a meticulous and streamlined approach to provide bespoke 
             solutions that perfectly align with clients' requirements.
           </p>
@@ -107,7 +107,7 @@ export default function Workflow() {
                 >
                   {step.title}
                 </h3>
-                <p className="font-sans text-sm text-[#0E2A43]/70 leading-relaxed">
+                <p className="font-sans text-base text-[#0E2A43]/70 leading-relaxed">
                   {step.description}
                 </p>
               </div>

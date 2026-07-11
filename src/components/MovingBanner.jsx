@@ -18,9 +18,29 @@ export default function MovingBanner() {
     { id: 11, src: new URL("../assets/media.jpg", import.meta.url).href, alt: "Media" },
     { id: 12, src: new URL("../assets/seo.png", import.meta.url).href, alt: "SEO" },
     { id: 13, src: new URL("../assets/vs.png", import.meta.url).href, alt: "VS" },
-    { id: 14, src: new URL("../assets/wordpress.jpeg", import.meta.url).href, alt: "WordPress" },
+   // { id: 14, src: new URL("../assets/wordpress.jpeg", import.meta.url).href, alt: "WordPress" },
     { id: 15, src: new URL("../assets/adobe illustrator.png", import.meta.url).href, alt: "AI" },
     { id: 16, src: new URL("../assets/adobe pro.png", import.meta.url).href, alt: "Pr" },
+    {id:17,src:new URL("../assets/Angular.png",import.meta.url).href,alt:"Angular"},
+    {id:18,src:new URL("../assets/react.png",import.meta.url).href,alt:"React"},
+    {id:19,src:new URL("../assets/Node.js.png",import.meta.url).href,alt:"Node.js"},
+    {id:20,src:new URL("../assets/Next.js.png",import.meta.url).href,alt:"Next.js"}, 
+    {id:21,src:new URL("../assets/js.png",import.meta.url).href,alt:"JavaScript"},
+    {id:22,src:new URL("../assets/mongodb.png",import.meta.url).href,alt:"MongoDB"},
+    {id:23,src:new URL("../assets/Python.png",import.meta.url).href,alt:"Python"},
+    {id:24,src:new URL("../assets/Kotlin.png",import.meta.url).href,alt:"Kotlin"},
+    {id:25,src:new URL("../assets/Next.js.png",import.meta.url).href,alt:"NextJS"},
+    {id:26,src:new URL("../assets/Node.js.png",import.meta.url).href,alt:"Node.js"},
+    {id:27,src:new URL("../assets/PostgresSQL.png",import.meta.url).href,alt:"PostgreSQL"},
+    {id:28,src:new URL("../assets/Pytorch.png",import.meta.url).href,alt:"PyTorch"},
+    {id:29,src:new URL("../assets/AWS.png",import.meta.url).href,alt:"AWS"},
+    {id:30,src:new URL("../assets/adobe photoshop.png",import.meta.url).href,alt:"Adobe Photoshop"},
+    {id:31,src:new URL("../assets/adobe after-effects.png",import.meta.url).href,alt:"Adobe After Effects"},
+    {id:32,src:new URL("../assets/Google Cloud.png",import.meta.url).href,alt:"Google Cloud Platform"},
+    {id:33,src:new URL("../assets/Swift.png",import.meta.url).href,alt:"Swift"},
+    {id:34,src:new URL("../assets/TypeScript.png",import.meta.url).href,alt:"TypeScript"},
+    {id:35,src:new URL("../assets/Vue.js.png",import.meta.url).href,alt:"Vue.js"}
+
   ];
 
   const scrollingLogos = [...logos, ...logos, ...logos];
