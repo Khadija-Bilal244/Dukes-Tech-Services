@@ -35,7 +35,7 @@ export default function Footer() {
                 <img 
                   src={logo} 
                   alt="Dukes Tech Services" 
-                  className="h-12 w-auto sm:h-14 md:h-16" 
+                  className="h-14 w-auto sm:h-14 md:h-16" 
                 />
               </div>
             </a>
@@ -43,7 +43,7 @@ export default function Footer() {
               <p className="font-sans text-lg font-bold text-white leading-tight">
                 Smart Tech, <span className="text-[#1CA7B8]">Smarter Future</span>
               </p>
-              <p className="font-sans text-sm text-white/50 mt-1">
+              <p className="font-sans text-normal text-white/90 mt-1">
                 Where Ideas Meet Technology
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="lg:col-span-6">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+            <h4 className="text-normal font-bold uppercase tracking-wider text-white/100 mb-4 font-sans">
               Our Services
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
@@ -61,8 +61,8 @@ export default function Footer() {
                   href="#services"
                   className="group flex items-start gap-2.5 py-1.5 px-2 rounded-lg hover:bg-white/5 transition-all duration-300 hover:translate-x-1"
                 >
-                  <span className="text-[#1CA7B8] text-lg leading-none mt-0.5">•</span>
-                  <span className="font-sans text-sm text-white/70 group-hover:text-white transition-colors duration-300">
+                  <span className="text-[#1CA7B8] h-3 w-3 text-lg leading-none mt-1">•</span>
+                  <span className="font-sans text-base text-white/90 group-hover:text-white transition-colors duration-300">
                     {service}
                   </span>
                 </a>
@@ -73,7 +73,7 @@ export default function Footer() {
           {/* Quick Links & Contact */}
           <div className="lg:col-span-3">
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+              <h4 className="text-normal font-bold uppercase tracking-wider text-white/100 mb-4 font-sans">
                 Quick Links
               </h4>
               <ul className="space-y-2">
@@ -81,9 +81,9 @@ export default function Footer() {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="group flex items-center gap-2 font-sans text-sm text-white/60 hover:text-white transition-all duration-300 hover:translate-x-1"
+                      className="group flex items-center gap-2 font-sans text-base text-white/90 hover:text-white transition-all duration-300 hover:translate-x-1"
                     >
-                      <ChevronRight className="h-3 w-3 text-[#1CA7B8]" />
+                      <ChevronRight className="h-4 w-4 text-[#1CA7B8]" />
                       {link.name}
                     </a>
                   </li>
@@ -92,23 +92,24 @@ export default function Footer() {
             </div>
 
             <div className="mt-6">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white/40 mb-4 font-sans">
+              <h4 className="text-normal font-bold uppercase tracking-wider text-white/100 mb-4 font-sans">
                 Contact Info
               </h4>
               <address className="not-italic space-y-2.5">
                 <div className="flex items-start gap-3">
-                  <MapPin className="h-4 w-4 text-[#1CA7B8] mt-0.5 flex-shrink-0" />
-                  <span className="font-sans text-sm text-white/50">The Mall Road, Lahore, Pakistan</span>
+                  <MapPin className="h-6 w-6 text-[#1CA7B8] mt-1 flex-shrink-0" />
+                  <span className="font-sans text-base text-white/90">Naqi Center, Dulha Street, 71-Mall Road,Lahore, Pakistan</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
-                  <a href="mailto:info.dukestech@gmail.com" className="font-sans text-sm text-white/50 hover:text-white transition-colors duration-300">
+                  <Mail className="h-6 w-6 text-[#1CA7B8] flex-shrink-0" />
+                  <a href="mailto:info.dukestech@gmail.com" className="font-sans text-base
+                   text-white/90 hover:text-white transition-colors duration-300">
                     info.dukestech@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-[#1CA7B8] flex-shrink-0" />
-                  <a href="tel:+923009459653" className="font-sans text-sm text-white/50 hover:text-white transition-colors duration-300">
+                  <Phone className="h-6 w-6 text-[#1CA7B8] flex-shrink-0" />
+                  <a href="tel:+923009459653" className="font-sans text-base text-white/90 hover:text-white transition-colors duration-300">
                     +92-300-9459653
                   </a>
                 </div>
@@ -118,7 +119,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/30">
+        <div className="mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-base text-white/90">
           <p className="font-sans">
             © {new Date().getFullYear()} Dukes Tech Services. All rights reserved.
           </p>

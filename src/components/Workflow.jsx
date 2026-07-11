@@ -89,11 +89,11 @@ export default function Workflow() {
               </div>
 
               {/* Image - with very light grey background */}
-              <div className="relative h-48 overflow-hidden bg-[#F5F6F8]">
+              <div className="relative h-48 overflow-hidden bg-sky-50">
                 <img
                   src={step.image}
                   alt={step.title}
-                  className="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-contain p-4transition-transform duration-700 group-hover:scale-110 mix-blend-multiply"
                 />
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
@@ -119,22 +119,6 @@ export default function Workflow() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-4 rounded-2xl bg-[#F2FAFB] px-8 py-5 border border-[#1CA7B8]/10">
-            <span className="font-sans text-sm font-semibold text-[#0E2A43]">
-              🚀 Ready to transform your business?
-            </span>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
-            >
-              Start Your Project
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
         </div>
       </div>
     </section>
