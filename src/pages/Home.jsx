@@ -9,6 +9,7 @@ import Sectors from "../components/Sectors.jsx";
 import TeamHome from "../components/Team-home.jsx";
 import FAQ from "../components/FAQ.jsx";
 import Contact from "../components/Contact.jsx";
+
 export default function Home() {
   return (
     <>

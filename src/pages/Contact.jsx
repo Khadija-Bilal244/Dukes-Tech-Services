@@ -35,7 +35,7 @@ export default function Contact() {
             <div className="bg-paper rounded-2xl p-6 border-t-4 border-gold">
               <p className="font-display font-semibold text-navy mb-1">Phone</p>
               <a href="tel:+923009459653" className="text-charcoal/60 hover:text-royalblue">
-                +92-300-9459653
+                +92 309 7671363
               </a>
             </div>
           </div>

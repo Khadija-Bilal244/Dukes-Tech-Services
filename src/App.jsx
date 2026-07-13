@@ -7,6 +7,7 @@ import About from "./pages/About.jsx";
 import Services from "./pages/Services.jsx";
 import Sectors from "./pages/Sectors.jsx";
 import Contact from "./pages/Contact.jsx";
+import Team from "./pages/Team.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/sectors" element={<Sectors />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/team" element={<Team />} />
         </Routes>
         <Footer />
       </div>
