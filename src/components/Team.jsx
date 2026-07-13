@@ -3,12 +3,10 @@ import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 // Import team images
-/*import team1 from "../assets/1.png";
+import team1 from "../assets/1.png";
+import team1 from "../assets/imranshahid.jpeg";
 import team2 from "../assets/2.png";
-import team3 from "../assets/3.png";
-import team4 from "../assets/4.png";
-import team5 from "../assets/5.png";
-import team6 from "../assets/6.png";*/
+import team3 from "../assets/arham.jpeg";
 import team7 from "../assets/7.png";
 
 export default function Team() {
@@ -20,25 +18,27 @@ export default function Team() {
 
   // Group members by category
   const categories = [
-    /*{
+    {
       title: "Senior Management",
       description: "Our visionary leaders driving strategic growth",
       members: [
-        { id: 1, img: team1, name: "Imran Shahid", role: "Founder / CEO" },
-        { id: 2, img: team2, name: "Usman Shahid", role: "Finance" },
-        { id: 3, img: team3, name: "Danial Waheed", role: "Operational" },
-        { id: 4, img: team4, name: "Aamir Khan", role: "Head of Graphic" },
+       { id: 1, img: team1, name: "Imran Shahid", role: "Founder / CEO" },
+       { id: 2, img: team2, name: "Usman Shahid", role: "Finance" },
+       { id: 3, img: team2, name: "Danial Waheed", role: "Operational" },
+       { id: 4, img: team2, name: "Aamir Khan", role: "Head of Graphic" },
+       { id:5,img:team3,name:"Arham Atif",role:"Head of Marketing & Sales"}
       ]
     },
     {
       title: "Technical & Marketing",
       description: "Innovators and strategists driving digital excellence",
       members: [
-        { id: 5, img: team5, name: "Azan Khan", role: "AI & ML Engineer" },
+        { id: 5, img: team2, name: "Azan Khan", role: "AI & ML Engineer" },
         { id: 6, img: team7, name: "Muqaddas Zeeshan", role: "Digital Marketing Consultant" },
-        { id: 7, img: team6, name: "Adnan Ayub", role: "Digital Marketing Consultant" },
+        { id: 7, img: team2, name: "Adnan Ayub", role: "Digital Marketing Consultant" },
+         {id: 8, img: team7, name: "Khadija Bilal", role: "Associate Developer" },
       ]
-    },*/
+    },
     {
       title: "Design & Marketing",
       description: "Creative minds shaping visual and digital experiences",
