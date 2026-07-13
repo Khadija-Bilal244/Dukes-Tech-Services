@@ -6,7 +6,9 @@ import Services from "../components/Services.jsx";
 import WhyChooseUs from "../components/WhyChosseUs.jsx";
 import MovingBanner from "../components/MovingBanner.jsx";
 import Sectors from "../components/Sectors.jsx";
-import Team from "../components/Team.jsx";
+import TeamHome from "../components/Team-home.jsx";
+import FAQ from "../components/FAQ.jsx";
+import Contact from "../components/Contact.jsx";
 export default function Home() {
   return (
     <>
@@ -22,7 +24,9 @@ export default function Home() {
       <WhyChooseUs/>
       <MovingBanner/>
       <Sectors/>
-      <Team/>
+      <TeamHome/>
+      <FAQ/>
+      <Contact/>
     </>
   );
 }

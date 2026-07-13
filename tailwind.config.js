@@ -13,14 +13,10 @@ export default {
         charcoal: '#23272B',
         paper: '#F6F7F5',
       },
-     theme: {
-  extend: {
-    fontFamily: {
-      sans: ["Poppins", "sans-serif"],
-      display: ["Poppins", "sans-serif"],
-    },
-  },
-},
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+        display: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

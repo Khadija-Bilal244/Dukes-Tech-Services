@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -9,16 +10,18 @@ import Contact from "./pages/Contact.jsx";
 
 export default function App() {
   return (
-    <div className="font-body text-charcoal">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/sectors" element={<Sectors />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </div>
+    <HelmetProvider>
+      <div className="font-body text-charcoal">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/sectors" element={<Sectors />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 }

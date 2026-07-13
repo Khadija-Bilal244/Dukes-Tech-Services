@@ -26,7 +26,7 @@ export default function Footer() {
     <footer className="bg-[#0E2A43] text-white/70 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-12">
           
           {/* Logo & Slogan */}
           <div className="lg:col-span-3">
@@ -118,8 +118,14 @@ export default function Footer() {
           </div>
         </div>
 
+      </div>
+
+      {/* Full-width divider */}
+      <div className="w-full border-t border-white/30"></div>
+
+      <div className="max-w-6xl mx-auto px-6 lg:px-10">
         {/* Bottom Bar */}
-        <div className="mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-base text-white/90">
+        <div className="mt-4 pt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-base text-white/90">
           <p className="font-sans">
             © {new Date().getFullYear()} Dukes Tech Services. All rights reserved.
           </p>
