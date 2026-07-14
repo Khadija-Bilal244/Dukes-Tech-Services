@@ -8,7 +8,7 @@ export default function Sectors() {
         description="Industries and sectors Dukes Tech Services supports across web, design, and infrastructure projects."
         path="/sectors"
       />
-      <section className="relative bg-navy overflow-hidden">
+      <section className="mt-12 relative bg-navy overflow-hidden">
         <div className="absolute top-0 right-0 w-40 h-24 bg-gold" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-14">
           <p className="font-mono text-xs uppercase tracking-widest text-white/60 mb-3">Home / Sectors</p>
