@@ -155,7 +155,7 @@ export default function Services() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="inline-block rounded-full bg-[#F2FAFB] px-6 py-2 text-xs font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans">
+          <span className="inline-block rounded-full bg-[#1CA7B8]/10 px-6 py-2 text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans">
             What We Offer
           </span>
           <h2 className="mt-4 font-sans text-3xl font-bold text-[#0E2A43] sm:text-4xl md:text-5xl">

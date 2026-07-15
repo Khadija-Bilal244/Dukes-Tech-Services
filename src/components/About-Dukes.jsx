@@ -51,8 +51,8 @@ const About = () => {
                 className="absolute inset-0 rounded-2xl pointer-events-none"
                 animate={{
                   background: isHovered 
-                    ? 'radial-gradient(circle at 50% 50%, rgba(28,167,184,0.08), transparent 70%)'
-                    : 'transparent',
+                    ? 'radial-gradient(circle at 50% 50%, rgba(28,167,184,0.1), transparent)'
+                    : 'rgba(28,167,184,0.2)',
                 }}
                 transition={{ duration: 0.4 }}
               />

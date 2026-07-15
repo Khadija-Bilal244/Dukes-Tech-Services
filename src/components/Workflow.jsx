@@ -52,7 +52,7 @@ export default function Workflow() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block rounded-full bg-[#F2FAFB] px-4 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans">
+          <span className="inline-block rounded-full bg-[#1CA7B8]/10 px-4 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans">
             Our Workflow
           </span>
           <h2 className="mt-3 sm:mt-4 font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E2A43] leading-tight">

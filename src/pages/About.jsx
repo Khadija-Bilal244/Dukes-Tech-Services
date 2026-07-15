@@ -3,7 +3,7 @@ import AboutHero from "../components/About-Hero.jsx";
 import AboutDukes from "../components/About-Dukes.jsx";
 import AboutMission from "../components/About-Mission.jsx";
 import AboutVision from "../components/About-Vision.jsx";
-
+import AboutValues from "../components/About-Values.jsx";
 export default function About() {
   return (
     <>
@@ -14,8 +14,9 @@ export default function About() {
 
       <AboutHero/>
       <AboutDukes/>
-      <AboutMission/>
       <AboutVision/>
+      <AboutMission/>
+      <AboutValues/>
     </>
 
   );

@@ -146,7 +146,7 @@ export default function MovingBanner() {
 
       {/* Header */}
       <div className="text-center mb-8">
-        <span className="inline-block rounded-full bg-[#1CA7B8]/10 px-5 py-1.5 text-[14px] sm:text-[10px] md:text-[12px] font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/20">
+        <span className="inline-block rounded-full bg-[#1CA7B8]/10 px-5 py-1.5 text-[14px] sm:text-[12px] md:text-[15px] font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/20">
           Our Technology Stack
         </span>
         <h3 className="mt-2 font-sans text-2xl font-semibold text-[#0E2A43] sm:text-3xl">

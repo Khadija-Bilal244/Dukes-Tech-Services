@@ -8,11 +8,12 @@ import Services from "./pages/Services.jsx";
 import Sectors from "./pages/Sectors.jsx";
 import Contact from "./pages/Contact.jsx";
 import Team from "./pages/Team.jsx";
-
+import ScrollToTop from "./components/ScrollToTop.jsx";
 export default function App() {
   return (
     <HelmetProvider>
       <div className="font-body text-charcoal">
+       <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

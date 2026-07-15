@@ -56,16 +56,16 @@ export default function AboutHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-[90%] sm:max-w-[85%] md:max-w-3xl lg:max-w-full bg-[#0E2A43]/70 backdrop-blur-sm rounded-r-2xl px-4 py-4 sm:px-6 sm:py-6 md:px-10 md:py-8 lg:px-12 lg:py-10"
+          className="max-w-[90%] sm:max-w-[85%] md:max-w-3xl lg:max-w-full bg-[#0E2A43]/30 backdrop-blur-sm rounded-r-2xl px-4 py-4 sm:px-6 sm:py-6 md:px-10 md:py-8 lg:px-12 lg:py-10"
         >
           {/* Heading */}
           <h1 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
             Innovating Today. <br className="hidden sm:block" />
-            <span className="text-[#1CA7B8]">Empowering Tomorrow.</span>
+            <span className="text-[#1CA7B8]">Transforming Tomorrow.</span>
           </h1>
 
           {/* Description */}
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed sm:leading-loose">
+          <p className="mt-3 sm:mt-4 text-base sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed sm:leading-loose">
             At Dukes Tech Services, we are helping businesses grow with innovative software, 
             AI-powered solutions, cybersecurity, cloud technologies, and digital transformation 
             services. We build secure, scalable, and future-ready solutions that drive measurable 
