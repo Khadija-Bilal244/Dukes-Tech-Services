@@ -1,4 +1,4 @@
-// ServicesDetail.jsx - Detailed Services Page with Images
+// ServicesDetail.jsx - Detailed Services Page with Images & Tech Icons
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -7,6 +7,7 @@ import {
   ArrowRight
 } from "lucide-react";
 
+// Service Images
 import webDevelopmentImg from "../assets/web-development.jfif";
 import graphicDesignImg from "../assets/graphic-design.jfif";
 import videoEditingImg from "../assets/video-editing.jfif";
@@ -16,6 +17,40 @@ import socialMediaImg from "../assets/social-media.jfif";
 import canvaImg from "../assets/canva.jfif";
 import softwareDevelopmentImg from "../assets/software-development.jfif";
 
+// Technology Icons - All imported once
+import canvaIcon from "../assets/canva.jpeg";
+import metaIcon from "../assets/meta.png";
+import msAzureIcon from "../assets/ms azure.png";
+import shopifyIcon from "../assets/shopify.png";
+import vsCodeIcon from "../assets/vs code.png";
+import adobeIllustratorIcon from "../assets/adobe illustrator.png";
+import dotNetIcon from "../assets/.net.png";
+import adobeProIcon from "../assets/adobe pro.png";
+import wordpressIcon from "../assets/wordpress2.png";
+import githubIcon from "../assets/github.png";
+import mediaIcon from "../assets/media.jpg";
+import seoIcon from "../assets/seo.png";
+import vsIcon from "../assets/vs.png";
+import angularIcon from "../assets/Angular.png";
+import reactIcon from "../assets/react.png";
+import tensorflowIcon from "../assets/TensorFlow.png";
+import nextjsIcon from "../assets/Next.js.png";
+import jsIcon from "../assets/js.png";
+import mongodbIcon from "../assets/mongodb.png";
+import pythonIcon from "../assets/Python.png";
+import kotlinIcon from "../assets/Kotlin.png";
+import nodejsIcon from "../assets/Node.js.png";
+import postgresqlIcon from "../assets/PostgresSQL.png";
+import pytorchIcon from "../assets/PyTorch.png";
+import awsIcon from "../assets/AWS.png";
+import photoshopIcon from "../assets/adobe photoshop.png";
+import afterEffectsIcon from "../assets/adobe after-effects.png";
+import googleCloudIcon from "../assets/Google Cloud.png";
+import swiftIcon from "../assets/Swift.png";
+import typescriptIcon from "../assets/TypeScript.png";
+import vuejsIcon from "../assets/Vue.js.png";
+import figmaIcon from "../assets/figma-original.svg";
+
 const servicesData = [
   {
     id: 1,
@@ -23,6 +58,13 @@ const servicesData = [
     title: "Web Development & Design",
     subtitle: "Custom Websites That Convert Visitors Into Customers",
     description: "Your website is often the first impression customers have of your business. We design and develop high-performance, responsive, and SEO-optimized websites that combine exceptional user experiences with modern technologies to help your business generate leads, increase conversions, and build long-term credibility.",
+    techIcons: [
+      reactIcon, angularIcon, vuejsIcon, nodejsIcon, 
+      nextjsIcon, typescriptIcon, jsIcon, mongodbIcon, 
+      postgresqlIcon, pythonIcon, dotNetIcon, 
+      vsCodeIcon, githubIcon, shopifyIcon, wordpressIcon,
+      figmaIcon, awsIcon, googleCloudIcon
+    ],
     offerings: [
       "Custom Website Development",
       "Responsive Website Design (Mobile-Friendly)",
@@ -39,6 +81,10 @@ const servicesData = [
     title: "Graphic Design",
     subtitle: "Creative Designs That Build Powerful Brands",
     description: "Strong branding creates lasting impressions. Our creative designers produce visually compelling assets that communicate your brand message, strengthen customer trust, and make your business stand out across digital and print platforms.",
+    techIcons: [
+      adobeIllustratorIcon, adobeProIcon, photoshopIcon, 
+      canvaIcon, afterEffectsIcon, figmaIcon
+    ],
     offerings: [
       "Logo Design & Branding",
       "Business Cards, Flyers & Brochures",
@@ -57,6 +103,10 @@ const servicesData = [
     title: "Video Editing & Production",
     subtitle: "Professional Videos That Inspire, Engage & Convert",
     description: "Video content is one of the most effective ways to connect with your audience. We produce professional videos that tell your story, increase engagement, strengthen brand awareness, and maximize your digital marketing success.",
+    techIcons: [
+      adobeProIcon, afterEffectsIcon, photoshopIcon, 
+      canvaIcon, mediaIcon
+    ],
     offerings: [
       "Professional Video Editing",
       "Motion Graphics & Animations",
@@ -71,6 +121,10 @@ const servicesData = [
     title: "SEO (Search Engine Optimization)",
     subtitle: "Increase Visibility. Drive Organic Growth.",
     description: "A beautiful website is only valuable if customers can find it. Our SEO specialists improve your search engine rankings through technical optimization, keyword research, content strategies, and local SEO to generate sustainable organic traffic.",
+    techIcons: [
+      seoIcon, metaIcon, googleCloudIcon, 
+      githubIcon, jsIcon, pythonIcon, wordpressIcon
+    ],
     offerings: [
       "On-Page SEO (Keywords, Meta Tags, Content Optimization)",
       "Local SEO (Google Business Profile Optimization)",
@@ -84,6 +138,11 @@ const servicesData = [
     title: "Digital Marketing & Ads",
     subtitle: "Data-Driven Marketing That Maximizes ROI",
     description: "Grow your business with targeted advertising campaigns designed to attract qualified customers and generate measurable results. We create high-performing campaigns across Google, Facebook, Instagram, and other digital platforms.",
+    techIcons: [
+      metaIcon, seoIcon, canvaIcon, 
+      googleCloudIcon, pythonIcon, jsIcon,
+      adobeIllustratorIcon, photoshopIcon
+    ],
     offerings: [
       "Meta Ads (Facebook & Instagram Advertising)",
       "Google Ads (Search, Display, Shopping, Video)",
@@ -100,6 +159,11 @@ const servicesData = [
     title: "Social Media Marketing & Management",
     subtitle: "Grow Your Brand Across Every Social Platform",
     description: "We help businesses build meaningful relationships with their audience through engaging content, strategic campaigns, community management, and data-driven social media marketing.",
+    techIcons: [
+      metaIcon, canvaIcon, seoIcon, 
+      mediaIcon, googleCloudIcon, pythonIcon,
+      photoshopIcon, afterEffectsIcon
+    ],
     offerings: [
       "Social Media Strategy & Planning",
       "Content Creation (Posts, Reels, Stories, Graphics)",
@@ -117,6 +181,10 @@ const servicesData = [
     title: "Canva Design Services",
     subtitle: "Professional Designs That Keep Your Brand Consistent",
     description: "Our Canva design services help businesses create professional, editable templates that maintain consistent branding across social media, marketing campaigns, presentations, and business communications.",
+    techIcons: [
+      canvaIcon, adobeIllustratorIcon, photoshopIcon, 
+      adobeProIcon, afterEffectsIcon
+    ],
     offerings: [
       "Social Media Templates (Instagram, Facebook, LinkedIn)",
       "Marketing Materials (Flyers, Posters, Banners)",
@@ -133,6 +201,14 @@ const servicesData = [
     title: "Software Development",
     subtitle: "Custom Software Built Around Your Business",
     description: "Every business has unique challenges. We develop secure, scalable, and customized software solutions that automate workflows, improve efficiency, reduce operational costs, and support long-term business growth.",
+    techIcons: [
+      reactIcon, angularIcon, vuejsIcon, nodejsIcon, 
+      nextjsIcon, typescriptIcon, jsIcon, pythonIcon, 
+      kotlinIcon, swiftIcon, dotNetIcon, mongodbIcon, 
+      postgresqlIcon, tensorflowIcon, pytorchIcon, 
+      awsIcon, googleCloudIcon, msAzureIcon, 
+      vsCodeIcon, vsIcon, githubIcon
+    ],
     offerings: [
       "POS Systems",
       "Accounting Software",
@@ -192,15 +268,14 @@ export default function ServicesDetail() {
                   isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
                 } gap-8 lg:gap-12 items-center bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/20 group`}
               >
-                {/* Image - Properly sized */}
-                <div className={`flex-shrink-0 w-full lg:w-2/5 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                {/* Image */}
+                <div className="flex-shrink-0 w-full lg:w-2/5">
                   <div className="relative overflow-hidden rounded-2xl bg-[#F2FAFB]">
                     <img
                       src={service.image}
                       alt={service.title}
                       className="w-full h-auto max-h-80 sm:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
                     />
-                    {/* Number badge on image */}
                     <div className="absolute top-3 right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full">
                       {String(service.id).padStart(2, '0')}
                     </div>
@@ -208,21 +283,39 @@ export default function ServicesDetail() {
                 </div>
 
                 {/* Content */}
-                <div className={`flex-1 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                  {/* Title */}
+                <div className="flex-1">
                   <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#0E2A43]">
                     {service.title}
                   </h3>
                   
-                  {/* Subtitle */}
                   <p className="mt-2 font-sans text-xl font-semibold text-[#1CA7B8]">
                     {service.subtitle}
                   </p>
                   
-                  {/* Description */}
                   <p className="mt-4 font-sans text-lg text-black leading-relaxed">
                     {service.description}
                   </p>
+                  
+                  {/* Technology Icons */}
+                  <div className="mt-4">
+                    <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-[#0E2A43]/60 mb-2">
+                      Technologies We Use
+                    </h4>
+                    <div className="flex flex-wrap gap-4">
+                      {service.techIcons.map((icon, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-center w-16 h-16 bg-white rounded-xl shadow-md border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 hover:shadow-lg transition-all duration-300 hover:scale-110"
+                        >
+                          <img
+                            src={icon}
+                            alt="Tech icon"
+                            className="w-11 h-11 object-contain"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   
                   {/* What We Offer */}
                   <div className="mt-6">
@@ -245,7 +338,7 @@ export default function ServicesDetail() {
                   </div>
                 </div>
 
-                {/* Decorative gradient line - Teal Green */}
+                {/* Decorative gradient line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-b-3xl" />
               </motion.div>
             );
