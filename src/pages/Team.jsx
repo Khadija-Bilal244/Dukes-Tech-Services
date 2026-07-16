@@ -185,7 +185,7 @@ export default function Team() {
     {
       title: "Design & Marketing",
       description: "Creative minds shaping visual and digital experiences",
-      cols: 5, // Changed to 5 columns
+      cols: 5,
       members: [
         { id: 10, img: team7, name: "Zainab Waris", role: "Graphic Designer / Commercial Analyst" },
         { id: 11, img: team7, name: "Ayesha Usman", role: "Graphic Designer / Commercial Analyst" },
@@ -233,29 +233,28 @@ export default function Team() {
         </script>
       </Helmet>
 
-      {/* Team Section */}
-      <section id="team" className="bg-white py-16 sm:py-20 mt-7">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <span className="inline-block rounded-full bg-[#F2FAFB] px-6 py-2 text-xs font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/20">
-              Our Team
-            </span>
-            <h1 className="mt-4 font-sans text-3xl font-bold text-[#0E2A43] sm:text-4xl md:text-5xl">
-              Meet Our <span className="text-[#1CA7B8]">Leadership</span>
-            </h1>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="inline-block h-1 w-16 rounded-full bg-[#1CA7B8]" />
-              <span className="inline-block h-1 w-8 rounded-full bg-[#1CA7B8]/30" />
-            </div>
-            <p className="mt-6 text-[black] max-w-2xl mx-auto font-sans text-base leading-relaxed">
-              Our esteemed senior management team possesses a wealth of experience and expertise, 
-              making them a driving force behind our organization's success. With a proven track 
-              record of strategic leadership and a deep understanding of the industry, they skillfully 
-              steer our company towards new heights.
-            </p>
-          </div>
+      {/* Hero Section */}
+      <section className="mt-14 relative bg-[#0E2A43] overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-24 bg-[#1CA7B8]" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#1CA7B8]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-[#1CA7B8]/5 rounded-full blur-3xl" />
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-24 pb-16 relative z-10">
+          <p className="font-mono text-base uppercase tracking-widest text-white mb-3">Home / Team</p>
+          <h1 className="font-sans text-4xl lg:text-5xl font-bold text-white">
+            Meet Our <br />
+            <span className="text-[#1CA7B8]">Leadership Team</span>
+          </h1>
+          <p className="mt-5 text-white max-w-xl font-sans text-lg leading-relaxed">
+            Our expert team combines technical excellence with creative innovation to deliver 
+            exceptional technology solutions that drive business growth and digital transformation.
+          </p>
+        </div>
+      </section>
 
+      {/* Team Section */}
+      <section id="team" className="bg-white py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Categories with dynamic grid columns */}
           {categories.map((category, catIndex) => (
             <div key={catIndex} className="mb-12 last:mb-0">
@@ -263,7 +262,7 @@ export default function Team() {
                 <h2 className="font-sans text-2xl font-bold text-[#0E2A43] sm:text-3xl">
                   {category.title}
                 </h2>
-                <p className="mt-2 font-sans text-base text-[black]">
+                <p className="mt-2 font-sans text-lg text-black">
                   {category.description}
                 </p>
                 <div className="flex justify-center gap-2 mt-2">
