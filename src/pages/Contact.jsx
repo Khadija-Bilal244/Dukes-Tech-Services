@@ -1,4 +1,6 @@
+// pages/Contact.jsx
 import Seo from "../components/Seo.jsx";
+import ContactForm from "../components/Contact.jsx";
 
 export default function Contact() {
   return (
@@ -8,39 +10,26 @@ export default function Contact() {
         description="Reach Dukes Tech Services in Lahore by phone, email, or our contact form."
         path="/contact"
       />
-      <section className="relative bg-navy overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-24 bg-gold" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-14">
-          <p className="font-mono text-xs uppercase tracking-widest text-white/60 mb-3">Home / Contact</p>
-          <h1 className="font-display text-4xl lg:text-5xl font-semibold text-white">Contact Us</h1>
-        </div>
-      </section>
-
-      <section className="bg-white py-20">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-charcoal/70 leading-relaxed mb-8">
-            Reach out to us for exceptional IT solutions.
+      
+      {/* Hero Section */}
+      <section className="mt-9 relative bg-[#0E2A43] overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-24 bg-[#1CA7B8]" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#1CA7B8]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-[#1CA7B8]/5 rounded-full blur-3xl" />
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-24 pb-16 relative z-10">
+          <p className="font-mono text-base uppercase tracking-widest text-white mb-3">Home / Contact</p>
+          <h1 className="font-sans text-4xl lg:text-5xl font-bold text-white">
+            Let's Build Your <br />
+            <span className="text-[#1CA7B8]">Digital Success</span>
+          </h1>
+          <p className="mt-5 text-white max-w-xl font-sans text-lg leading-relaxed">
+            Have a project in mind? We'd love to hear about it. Reach out to us and 
+            let's create something amazing together.
           </p>
-          <div className="grid sm:grid-cols-3 gap-6 text-sm">
-            <div className="bg-paper rounded-2xl p-6 border-t-4 border-royalblue">
-              <p className="font-display font-semibold text-navy mb-1">Address</p>
-              <p className="text-charcoal/60">The Mall Road, Lahore, Pakistan</p>
-            </div>
-            <div className="bg-paper rounded-2xl p-6 border-t-4 border-royalgreen">
-              <p className="font-display font-semibold text-navy mb-1">Email</p>
-              <a href="mailto:info.dukestech@gmail.com" className="text-charcoal/60 hover:text-royalblue">
-                info.dukestech@gmail.com
-              </a>
-            </div>
-            <div className="bg-paper rounded-2xl p-6 border-t-4 border-gold">
-              <p className="font-display font-semibold text-navy mb-1">Phone</p>
-              <a href="tel:+923009459653" className="text-charcoal/60 hover:text-royalblue">
-                +92 309 7671363
-              </a>
-            </div>
-          </div>
         </div>
       </section>
+      <ContactForm />
     </>
   );
 }
