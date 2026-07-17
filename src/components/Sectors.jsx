@@ -6,6 +6,9 @@ import accountingImg from "../assets/accounting.jpg";
 import gymImg from "../assets/gym.jpg";
 import educationImg from "../assets/education.jpg";
 import clothingImg from "../assets/clothing.jpg";
+import foodImg from "../assets/food.jfif";
+import shoesImg from "../assets/shoes.jfif";
+import securityImg from "../assets/security.jfif";
 
 const StoryTimeline = () => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
@@ -57,73 +60,109 @@ const StoryTimeline = () => {
       image: furnitureImg,
       title: "Furniture",
       description:
-        "From family-run workshops to established retailers, we help furniture businesses manage inventory costs, cash flow, and profitability with clarity.",
+        "From family-run workshops to established retailers, we help furniture businesses manage inventory costs, streamline supply chains, and enhance profitability with clear, actionable financial insights that drive sustainable growth.",
       align: "left",
-      color: "from-teal-50 to-cyan-50",
-      borderColor: "border-teal-200",
-      textColor: "text-teal-700",
-      badgeColor: "from-teal-500 to-cyan-600",
+      color: "from-amber-50 to-orange-50",
+      borderColor: "border-amber-200",
+      textColor: "text-amber-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
     {
       id: 2,
       image: consultancyImg,
       title: "Consultancy",
       description:
-        "We support consultancy firms with the financial structure they need to focus on delivering advice — accurate reporting, tax planning, and compliance handled for you.",
+        "We empower consultancy firms with robust financial structures, accurate reporting, tax planning, and compliance solutions—allowing you to focus on delivering exceptional advice while we handle the numbers with precision and care.",
       align: "right",
-      color: "from-navy-50 to-teal-50",
-      borderColor: "border-navy-200",
-      textColor: "text-navy-700",
-      badgeColor: "from-navy-600 to-teal-600",
+      color: "from-blue-50 to-cyan-50",
+      borderColor: "border-blue-200",
+      textColor: "text-blue-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
     {
       id: 3,
       image: accountingImg,
       title: "Accounting",
       description:
-        "Working closely with accounting practices, we bring precision and up-to-date insight to every set of books, so decisions are always backed by real numbers.",
+        "We partner with accounting practices to deliver precision, real-time insights, and up-to-date financial intelligence. Every decision is backed by accurate numbers, empowering you to guide your clients with confidence and clarity.",
       align: "left",
-      color: "from-cyan-50 to-teal-50",
-      borderColor: "border-cyan-200",
-      textColor: "text-cyan-700",
-      badgeColor: "from-cyan-500 to-teal-500",
+      color: "from-emerald-50 to-teal-50",
+      borderColor: "border-emerald-200",
+      textColor: "text-emerald-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
     {
       id: 4,
       image: gymImg,
       title: "Gym & Fitness",
       description:
-        "Gyms and fitness studios trust us to keep membership revenue, payroll, and equipment financing organised, so they can focus on their members.",
+        "We help gyms and fitness studios stay focused on their members by managing membership revenue, payroll, equipment financing, and operational finances with efficiency, accuracy, and complete peace of mind.",
       align: "right",
-      color: "from-teal-50 to-navy-50",
-      borderColor: "border-teal-200",
-      textColor: "text-teal-700",
-      badgeColor: "from-teal-500 to-navy-600",
+      color: "from-red-50 to-rose-50",
+      borderColor: "border-red-200",
+      textColor: "text-red-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
     {
       id: 5,
       image: educationImg,
       title: "Education",
       description:
-        "From tutoring centres to training institutes, we help education providers manage fees, grants, and compliance with confidence.",
+        "We support educational institutions—from tutoring centres to training institutes—with comprehensive fee management, grant tracking, regulatory compliance, and financial planning to help you focus on shaping futures.",
       align: "left",
-      color: "from-cyan-50 to-navy-50",
-      borderColor: "border-cyan-200",
-      textColor: "text-cyan-700",
-      badgeColor: "from-cyan-500 to-navy-600",
+      color: "from-indigo-50 to-purple-50",
+      borderColor: "border-indigo-200",
+      textColor: "text-indigo-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
     {
       id: 6,
       image: clothingImg,
       title: "Clothing & Retail",
       description:
-        "For clothing and retail businesses, we handle stock valuation, seasonal cash flow, and VAT so you can concentrate on growing your brand.",
+        "We help clothing and retail businesses navigate the complexities of stock valuation, seasonal cash flow, VAT compliance, and financial planning—so you can focus on building your brand and growing your customer base.",
       align: "right",
-      color: "from-teal-50 to-cyan-50",
-      borderColor: "border-teal-200",
-      textColor: "text-teal-700",
-      badgeColor: "from-teal-500 to-cyan-600",
+      color: "from-pink-50 to-rose-50",
+      borderColor: "border-pink-200",
+      textColor: "text-pink-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
     },
+    {
+      id: 7,
+      image: foodImg,
+      title: "Food & Beverage",
+      description:
+        "We partner with food and beverage businesses to optimize inventory management, streamline supply chain finances, ensure regulatory compliance, and drive profitability—helping you deliver quality while we handle the numbers.",
+      align: "left",
+      color: "from-yellow-50 to-amber-50",
+      borderColor: "border-yellow-200",
+      textColor: "text-yellow-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
+    },
+    {
+      id: 8,
+      image: shoesImg,
+      title: "Shoes & Footwear",
+      description:
+        "We support footwear brands and retailers with tailored financial solutions—managing inventory costs, supply chain optimization, seasonal cash flow, and business growth strategies to help you step ahead of the competition.",
+      align: "right",
+      color: "from-sky-50 to-blue-50",
+      borderColor: "border-sky-200",
+      textColor: "text-sky-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
+    },
+    {
+      id: 9,
+      image: securityImg,
+      title: "Security & Protection",
+      description:
+        "We provide financial clarity and operational support to security firms—managing payroll, equipment costs, compliance reporting, and business growth strategies so you can focus on protecting what matters most.",
+      align: "left",
+      color: "from-gray-50 to-slate-50",
+      borderColor: "border-gray-200",
+      textColor: "text-gray-700",
+      badgeColor: "from-[#1CA7B8] to-[#0E2A43]",
+    }
   ];
 
   return (
@@ -381,7 +420,8 @@ const StoryTimeline = () => {
           </h2>
 
           <p className="text-[#0E2A43]/70 max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed relative z-10">
-            Dukes Tech Services partners with diverse industries, delivering tailored technology solutions that drive growth, streamline operations, and empower businesses to thrive in the digital age.
+            Dukes Tech Services partners with diverse industries, delivering tailored technology solutions 
+            that drive growth, streamline operations, and empower businesses to thrive in the digital age.
           </p>
 
           {/* DECORATIVE LINE WITH ANIMATED ELEMENTS */}
@@ -485,12 +525,12 @@ const StoryTimeline = () => {
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#1CA7B8]/20 to-[#0E2A43]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
                 </div>
 
-                {/* NUMBER BADGE - ENHANCED */}
+                {/* NUMBER BADGE - TEAL GREEN */}
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className={`absolute -bottom-5 ${
                     item.align === "left" ? "-right-5" : "-left-5"
-                  } bg-gradient-to-br ${item.badgeColor} text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl border-4 border-white z-20`}
+                  } bg-gradient-to-br from-[#1CA7B8] to-[#0E2A43] text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl shadow-[#1CA7B8]/30 border-4 border-white z-20`}
                   animate={{
                     rotate: [0, 5, 0],
                   }}
@@ -589,7 +629,7 @@ const StoryTimeline = () => {
             </span>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-6 py-2.5 text-base font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
             >
               Let's Talk
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

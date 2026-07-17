@@ -7,8 +7,7 @@ import {
   Shield,
   Award,
   Users,
-  Heart,
-  ArrowRight
+  Heart
 } from "lucide-react";
 
 const coreValues = [
@@ -16,66 +15,48 @@ const coreValues = [
     id: 1,
     icon: TrendingUp,
     title: "Client Success",
-    description: "We measure our success by the success of our clients. By understanding their unique goals and challenges, we deliver tailored solutions that create measurable value, foster long-term growth, and build lasting partnerships.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#1CA7B8]/20",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "We measure our success by the success of our clients — tailored solutions that create measurable value and build lasting partnerships.",
+    dark: true,
     delay: 0
   },
   {
     id: 2,
     icon: Lightbulb,
     title: "Innovation",
-    description: "Technology is constantly evolving, and so are we. We embrace creativity, continuous learning, and emerging technologies to develop forward-thinking solutions that help businesses stay ahead of the competition.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#1CA7B8]/20",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "We embrace creativity and emerging technologies to build forward-thinking solutions that keep businesses ahead.",
+    dark: true,
     delay: 0.1
   },
   {
     id: 3,
     icon: Shield,
     title: "Integrity",
-    description: "Honesty, transparency, and accountability are the foundation of everything we do. We build trust by maintaining open communication, delivering on our commitments, and always acting with professionalism and ethical responsibility.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#1CA7B8]/20",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "Honesty, transparency, and accountability are the foundation of everything we do.",
+    dark: true,
     delay: 0.2
   },
   {
     id: 4,
     icon: Award,
     title: "Excellence",
-    description: "We are committed to delivering the highest standards of quality in every project. From strategy and design to development and support, we focus on precision, performance, and continuous improvement to exceed expectations.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#1CA7B8]/20",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "Precision, performance, and continuous improvement in every project we ship.",
+    dark: true,
     delay: 0.3
   },
   {
     id: 5,
     icon: Users,
     title: "Collaboration",
-    description: "Great ideas are built together. We work closely with our clients, partners, and team members to create innovative solutions through effective communication, teamwork, and shared success.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#abdfe6]/50",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "Great ideas are built together — with clients, partners, and our own team, every step of the way.",
+    dark: true,
     delay: 0.4
   },
   {
     id: 6,
     icon: Heart,
     title: "Customer-Centric Approach",
-    description: "Every decision we make begins with our clients' needs. We focus on understanding their vision, solving real business challenges, and delivering technology solutions that provide exceptional value and long-term success.",
-    color: "from-[#1CA7B8] to-[#0E2A43]",
-    bgColor: "bg-[#1CA7B8]/20",
-    iconColor: "text-[#1CA7B8]",
-    borderColor: "border-[#1CA7B8]/20",
+    description: "Every decision starts with our clients' needs — solving real challenges with lasting value.",
+    dark: true,
     delay: 0.5
   }
 ];
@@ -91,7 +72,7 @@ export default function CoreValues() {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-14">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block rounded-full bg-[#F2FAFB] px-4 py-1.5 text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]">
+          <span className="inline-block rounded-full bg-white px-4 py-1.5 text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]">
             Our Core Values
           </span>
           <h2 className="mt-4 font-sans text-3xl sm:text-4xl md:text-5xl font-bold text-[#0E2A43]">
@@ -108,38 +89,66 @@ export default function CoreValues() {
           </p>
         </div>
 
-        {/* Values Grid */}
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {coreValues.map((value, index) => {
+        {/* Bento Grid */}
+        <div
+          ref={ref}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        >
+          {coreValues.map((value) => {
             const Icon = value.icon;
             return (
               <motion.div
                 key={value.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: value.delay }}
-                className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 relative overflow-hidden"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: value.delay, duration: 0.5 }}
+                className={`group relative overflow-hidden rounded-3xl p-6 sm:p-7 min-h-[280px] flex flex-col transition-all duration-500 hover:-translate-y-1.5 ${
+                  value.dark
+                    ? "bg-[#0E2A43] text-white shadow-xl shadow-[#0E2A43]/20 hover:shadow-2xl hover:shadow-[#1CA7B8]/30"
+                    : "bg-white text-[#0E2A43] shadow-lg hover:shadow-2xl border border-[#0E2A43]/5 hover:border-[#1CA7B8]/40"
+                }`}
               >
-                {/* Gradient background on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F2FAFB] to-[#1CA7B8]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Big watermark icon */}
+                <Icon
+                  className={`absolute -right-6 -bottom-6 h-32 w-32 sm:h-40 sm:w-40 transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110 ${
+                    value.dark ? "text-white/5" : "text-[#1CA7B8]/[0.07]"
+                  }`}
+                  strokeWidth={1.2}
+                />
 
-                {/* Icon - Teal Green */}
-                <div className={`relative z-10 inline-flex h-14 w-14 items-center justify-center rounded-xl ${value.bgColor} ${value.iconColor} transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gradient-to-br group-hover:from-[#1CA7B8] group-hover:to-[#0E2A43] group-hover:text-white group-hover:shadow-lg`}>
-                  <Icon className="h-7 w-7" />
+                {/* Diagonal accent for dark cards */}
+                {value.dark && (
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#1CA7B8] opacity-20 blur-2xl rounded-full" />
+                )}
+
+                {/* Icon badge - Reduced margin bottom */}
+                <div
+                  className={`relative z-10 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 ${
+                    value.dark
+                      ? "bg-[#1CA7B8] text-white"
+                      : "bg-[#0E2A43] text-white"
+                  }`}
+                >
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
                 </div>
 
-                {/* Title */}
-                <h3 className="relative z-10 mt-4 font-sans text-2xl font-bold text-[#0E2A43] transition-colors duration-300 group-hover:text-[#1CA7B8]">
-                  {value.title}
-                </h3>
-
-                {/* Description */}
-                <p className="relative z-10 mt-3 font-sans text-lg text-black leading-relaxed">
-                  {value.description}
-                </p>
-
-                {/* Decorative bottom line - Teal Green to Navy */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
+                {/* Content - Minimal gap */}
+                <div className="relative z-10 mt-6 sm:mt-8 flex-1 flex flex-col">
+                  <h3
+                    className={`font-sans font-bold leading-tight text-xl sm:text-2xl ${
+                      value.dark ? "text-white" : "text-[#0E2A43]"
+                    } group-hover:text-[#1CA7B8] transition-colors duration-300`}
+                  >
+                    {value.title}
+                  </h3>
+                  <p
+                    className={`mt-3 font-sans leading-relaxed text-lg ${
+                      value.dark ? "text-white/80" : "text-black/60"
+                    }`}
+                  >
+                    {value.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

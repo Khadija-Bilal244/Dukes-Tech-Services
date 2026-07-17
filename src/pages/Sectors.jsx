@@ -32,8 +32,8 @@ export default function Sectors() {
         </div>
       </section>
       <SectorsValues />
-      <SectorsSection />
       <SectorsClients />
+      <SectorsSection />
     </>
   );
 }
