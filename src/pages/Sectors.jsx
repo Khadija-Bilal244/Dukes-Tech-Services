@@ -1,6 +1,8 @@
-
+// pages/Sectors.jsx
 import Seo from "../components/Seo.jsx";
 import SectorsSection from "../components/Sectors.jsx";
+import SectorsValues from "../components/Sectors-Values.jsx";
+import SectorsClients from "../components/Sectors-Clients.jsx";
 
 export default function Sectors() {
   return (
@@ -18,19 +20,20 @@ export default function Sectors() {
         <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-[#1CA7B8]/5 rounded-full blur-3xl" />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-24 pb-16 relative z-10">
-          <p className="font-mono text-base uppercase tracking-widest text-white mb-3">Home / Sectors</p>
+          <p className="font-mono text-base uppercase tracking-widest text-white/60 mb-3">Home / Sectors</p>
           <h1 className="font-sans text-4xl lg:text-5xl font-bold text-white">
             Industries We <br />
             <span className="text-[#1CA7B8]">Serve</span>
           </h1>
-          <p className="mt-5 text-white max-w-xl font-sans text-lg leading-relaxed">
+          <p className="mt-5 text-white/80 max-w-xl font-sans text-lg leading-relaxed">
             Dukes Tech Services partners with diverse industries, delivering tailored technology solutions 
             that drive growth, streamline operations, and empower businesses to thrive in the digital age.
           </p>
         </div>
       </section>
-
+      <SectorsValues />
       <SectorsSection />
+      <SectorsClients />
     </>
   );
 }

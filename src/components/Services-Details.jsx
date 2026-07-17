@@ -16,6 +16,7 @@ import marketingImg from "../assets/marketing.jfif";
 import socialMediaImg from "../assets/social-media.jfif";
 import canvaImg from "../assets/canva.jfif";
 import softwareDevelopmentImg from "../assets/software-development.jfif";
+import shopifyServiceImg from "../assets/shopifystore.jfif";
 
 // Technology Icons - All imported once
 import canvaIcon from "../assets/canva.jpeg";
@@ -77,6 +78,32 @@ const servicesData = [
   },
   {
     id: 2,
+    image: shopifyServiceImg,
+    title: "Shopify Development",
+    subtitle: "Custom E-Commerce Stores That Drive Sales",
+    description: "We build high-converting Shopify stores that deliver exceptional shopping experiences. From custom theme development to seamless checkout optimization, we create e-commerce solutions that help you sell more, scale faster, and build a strong online presence.",
+    techIcons: [
+      shopifyIcon, reactIcon, nodejsIcon, typescriptIcon,
+      jsIcon, vsCodeIcon, githubIcon, figmaIcon,
+      awsIcon, googleCloudIcon
+    ],
+    offerings: [
+      "Custom Shopify Store Design",
+      "Shopify Theme Development",
+      "Shopify Store Setup",
+      "Homepage Design",
+      "Product Page Design",
+      "Collection Page Design",
+      "Navigation & User Experience",
+      "Mobile Optimization",
+      "Speed & Performance Optimization",
+      "Brand & Visual Design",
+      "Shopify Maintenance & Support",
+      "Checkout & Cart Customization (Shopify Plus)"
+    ]
+  },
+  {
+    id: 3,
     image: graphicDesignImg,
     title: "Graphic Design",
     subtitle: "Creative Designs That Build Powerful Brands",
@@ -98,7 +125,7 @@ const servicesData = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     image: videoEditingImg,
     title: "Video Editing & Production",
     subtitle: "Professional Videos That Inspire, Engage & Convert",
@@ -116,7 +143,7 @@ const servicesData = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     image: seoImg,
     title: "SEO (Search Engine Optimization)",
     subtitle: "Increase Visibility. Drive Organic Growth.",
@@ -133,7 +160,7 @@ const servicesData = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     image: marketingImg,
     title: "Digital Marketing & Ads",
     subtitle: "Data-Driven Marketing That Maximizes ROI",
@@ -154,7 +181,7 @@ const servicesData = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     image: socialMediaImg,
     title: "Social Media Marketing & Management",
     subtitle: "Grow Your Brand Across Every Social Platform",
@@ -176,7 +203,7 @@ const servicesData = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     image: canvaImg,
     title: "Canva Design Services",
     subtitle: "Professional Designs That Keep Your Brand Consistent",
@@ -196,7 +223,7 @@ const servicesData = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     image: softwareDevelopmentImg,
     title: "Software Development",
     subtitle: "Custom Software Built Around Your Business",
@@ -233,21 +260,21 @@ export default function ServicesDetail() {
   });
 
   return (
-    <section className="bg-[#F2FAFB] py-16 md:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#F2FAFB] py-8 sm:py-12 md:py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block rounded-full bg-white px-4 py-1.5 text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/50">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <span className="inline-block rounded-full bg-white px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs md:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/80">
             Our Services
           </span>
-          <h2 className="mt-4 font-sans text-3xl sm:text-4xl md:text-5xl font-bold text-[#0E2A43]">
+          <h2 className="mt-3 sm:mt-4 font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0E2A43]">
             Technology Solutions That <span className="text-[#1CA7B8]">Deliver Real Business Results</span>
           </h2>
-          <div className="flex justify-center gap-2 mt-3">
-            <span className="inline-block h-1 w-12 rounded-full bg-[#1CA7B8]" />
-            <span className="inline-block h-1 w-6 rounded-full bg-[#1CA7B8]/30" />
+          <div className="flex justify-center gap-2 mt-2 sm:mt-3">
+            <span className="inline-block h-1 w-8 sm:w-10 md:w-12 rounded-full bg-[#1CA7B8]" />
+            <span className="inline-block h-1 w-4 sm:w-5 md:w-6 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-4 text-black max-w-2xl mx-auto font-sans text-lg sm:text-lg leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-[#0E2A43]/70 max-w-2xl mx-auto font-sans text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-2">
             Whether you're launching a startup, expanding your business, or modernizing enterprise operations, 
             our comprehensive technology services are designed to solve complex challenges, streamline processes, 
             and accelerate growth.
@@ -255,7 +282,7 @@ export default function ServicesDetail() {
         </div>
 
         {/* Services List */}
-        <div ref={ref} className="space-y-12 md:space-y-16">
+        <div ref={ref} className="space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16">
           {servicesData.map((service, index) => {
             const isEven = index % 2 === 0;
             return (
@@ -266,51 +293,51 @@ export default function ServicesDetail() {
                 transition={{ delay: index * 0.1 }}
                 className={`relative flex flex-col ${
                   isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } gap-8 lg:gap-12 items-center bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/20 group`}
+                } gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/20 group`}
               >
                 {/* Image */}
                 <div className="flex-shrink-0 w-full lg:w-2/5">
-                  <div className="relative overflow-hidden rounded-2xl bg-[#F2FAFB]">
+                  <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-[#F2FAFB]">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-auto max-h-80 sm:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-72 lg:max-h-80 xl:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-3 right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <div className="absolute top-1 sm:top-2 md:top-3 right-1 sm:right-2 md:right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-[8px] sm:text-xs font-bold px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full">
                       {String(service.id).padStart(2, '0')}
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1">
-                  <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#0E2A43]">
+                <div className="flex-1 w-full">
+                  <h3 className="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0E2A43]">
                     {service.title}
                   </h3>
                   
-                  <p className="mt-2 font-sans text-xl font-semibold text-[#1CA7B8]">
+                  <p className="mt-1 sm:mt-2 font-sans text-base sm:text-lg md:text-xl font-semibold text-[#1CA7B8]">
                     {service.subtitle}
                   </p>
                   
-                  <p className="mt-4 font-sans text-lg text-black leading-relaxed">
+                  <p className="mt-2 sm:mt-3 md:mt-4 font-sans text-xs sm:text-sm md:text-base lg:text-lg text-black/90 leading-relaxed">
                     {service.description}
                   </p>
                   
-                  {/* Technology Icons */}
-                  <div className="mt-4">
-                    <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-[#0E2A43]/60 mb-2">
+                  {/* Technology Icons - Larger & Responsive */}
+                  <div className="mt-3 sm:mt-4 md:mt-6">
+                    <h4 className="font-sans text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black mb-1.5 sm:mb-2 md:mb-3">
                       Technologies We Use
                     </h4>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
                       {service.techIcons.map((icon, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center justify-center w-16 h-16 bg-white rounded-xl shadow-md border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 hover:shadow-lg transition-all duration-300 hover:scale-110"
+                          className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-white rounded-md sm:rounded-lg md:rounded-xl shadow-md border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 hover:shadow-lg transition-all duration-300 hover:scale-110"
                         >
                           <img
                             src={icon}
                             alt="Tech icon"
-                            className="w-11 h-11 object-contain"
+                            className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-11 xl:h-11 object-contain"
                           />
                         </div>
                       ))}
@@ -318,18 +345,18 @@ export default function ServicesDetail() {
                   </div>
                   
                   {/* What We Offer */}
-                  <div className="mt-6">
-                    <h4 className="font-sans text-base font-bold uppercase tracking-wider text-[#1CA7B8] mb-3">
+                  <div className="mt-3 sm:mt-4 md:mt-6">
+                    <h4 className="font-sans text-[10px] sm:text-xs md:text-base font-bold uppercase tracking-wider text-[#1CA7B8] mb-1.5 sm:mb-2 md:mb-3">
                       What We Offer
                     </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
                       {service.offerings.map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#F2FAFB] transition-colors duration-300 group/item"
+                          className="flex items-start gap-1.5 sm:gap-2 md:gap-2.5 p-1 sm:p-1.5 md:p-2 rounded-lg hover:bg-[#F2FAFB] transition-colors duration-300 group/item"
                         >
-                          <CheckCircle className="h-4 w-4 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-transform group-hover/item:scale-110" />
-                          <span className="font-sans text-base text-black">
+                          <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-transform group-hover/item:scale-110" />
+                          <span className="font-sans text-[10px] sm:text-xs md:text-base text-black">
                             {item}
                           </span>
                         </div>
@@ -339,24 +366,24 @@ export default function ServicesDetail() {
                 </div>
 
                 {/* Decorative gradient line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-b-3xl" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-b-xl sm:rounded-b-2xl md:rounded-b-3xl" />
               </motion.div>
             );
           })}
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-4 rounded-2xl bg-white px-6 py-4 sm:px-8 sm:py-5 border border-[#1CA7B8]/10 shadow-lg">
-            <span className="font-sans text-lg font-semibold text-[#0E2A43]">
-               Ready to get started?
+        <div className="mt-8 sm:mt-12 md:mt-16 text-center">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 rounded-xl sm:rounded-2xl bg-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 lg:py-5 border border-[#1CA7B8]/10 shadow-lg">
+            <span className="font-sans text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-[#0E2A43]">
+              Ready to get started?
             </span>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-5 sm:px-6 py-2 sm:py-2.5 text-lg font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-3 sm:px-4 md:px-5 lg:px-6 py-1 sm:py-1.5 md:py-2 lg:py-2.5 text-[10px] sm:text-sm md:text-base lg:text-lg font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 hover:scale-105 transition-transform"
             >
               Let's Talk
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4" />
             </a>
           </div>
         </div>

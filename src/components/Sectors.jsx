@@ -522,7 +522,7 @@ const StoryTimeline = () => {
                     whileInView={{ width: "2rem" }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   />
-                  <span className="text-sm font-semibold tracking-wider text-[#1CA7B8]">
+                  <span className="text-lg font-bold tracking-wider text-[#1CA7B8]">
                     SECTOR {i + 1}
                   </span>
                 </div>

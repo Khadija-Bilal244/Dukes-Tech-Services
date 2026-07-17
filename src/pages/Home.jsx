@@ -8,7 +8,7 @@ import MovingBanner from "../components/MovingBanner.jsx";
 import Sectors from "../components/Sectors.jsx";
 import TeamHome from "../components/Team-home.jsx";
 import FAQ from "../components/FAQ.jsx";
-import Contact from "../components/Contact.jsx";
+import Contact from "../components/Home-Contact.jsx";
 
 export default function Home() {
   return (

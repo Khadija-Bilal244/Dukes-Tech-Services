@@ -12,6 +12,7 @@ import {
   Share2, 
   PenTool,
   Code,
+  ShoppingBag,
   CheckCircle
 } from "lucide-react";
 
@@ -29,6 +30,26 @@ const SERVICES_DATA = [
       "Landing Page Design",
       "CMS Development (WordPress)",
       "UI/UX Design & Prototyping"
+    ]
+  },
+  {
+    id: "shopify-development",
+    icon: ShoppingBag,
+    title: "Shopify Development",
+    description: "Custom e-commerce stores that deliver exceptional shopping experiences and drive sales.",
+    subServices: [
+      "Custom Shopify Store Design",
+      "Shopify Theme Development",
+      "Shopify Store Setup",
+      "Homepage Design",
+      "Product Page Design",
+      "Collection Page Design",
+      "Navigation & User Experience",
+      "Mobile Optimization",
+      "Speed & Performance Optimization",
+      "Brand & Visual Design",
+      "Shopify Maintenance & Support",
+      "Checkout & Cart Customization (Shopify Plus)"
     ]
   },
   {
@@ -271,7 +292,7 @@ export default function Services() {
         <div className="mt-16 text-center">
           <div className="inline-flex flex-wrap items-center justify-center gap-4 rounded-2xl bg-[#F2FAFB] px-8 py-6 border border-[#1CA7B8]/10">
             <span className="font-sans text-lg font-semibold text-[#0E2A43]">
-               Need a custom solution?
+              Need a custom solution?
             </span>
             <div className="h-6 w-px bg-[#0E2A43]/10 hidden sm:block" />
             <a
