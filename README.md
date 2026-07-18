@@ -1,4 +1,4 @@
-# Dukes Tech Services - Official Website(Currently in Working)
+# Dukes Tech Services - Official Website(Currently in Working State)
 
 ## Overview
 
