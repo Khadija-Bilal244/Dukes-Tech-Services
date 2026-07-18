@@ -8,7 +8,7 @@ import imranShahid from "../assets/imranshahid.jpeg";
 import arham from "../assets/arham.jpeg";
 import team2 from "../assets/2.png";
 import team7 from "../assets/7.png";
-
+import CodeOfConduct from "../components/Sectors-CodeOfConduct"
 export default function Team() {
   const [hoveredId, setHoveredId] = useState(null);
   const { ref, inView } = useInView({
@@ -232,7 +232,6 @@ export default function Team() {
           {JSON.stringify(teamSchema)}
         </script>
       </Helmet>
-
       {/* Hero Section */}
       <section className="mt-14 relative bg-[#0E2A43] overflow-hidden">
         <div className="absolute top-0 right-0 w-40 h-24 bg-[#1CA7B8]" style={{ clipPath: "polygon(30% 0, 100% 0, 70% 100%, 0 100%)" }} />
@@ -251,9 +250,9 @@ export default function Team() {
           </p>
         </div>
       </section>
-
+     <CodeOfConduct/>
       {/* Team Section */}
-      <section id="team" className="bg-white py-16 sm:py-20">
+      <section id="team" className="bg-[#F2FAFB] py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Categories with dynamic grid columns */}
           {categories.map((category, catIndex) => (
