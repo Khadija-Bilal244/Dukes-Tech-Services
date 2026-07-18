@@ -16,7 +16,7 @@ export default function MovingBanner() {
     { id: 8, src: new URL("../assets/adobe pro.png", import.meta.url).href, alt: "Adobe Pro" },
     { id: 9, src: new URL("../assets/wordpress2.png", import.meta.url).href, alt: "WordPress" },
     { id: 10, src: new URL("../assets/github.png", import.meta.url).href, alt: "GitHub" },
-    { id: 11, src: new URL("../assets/media.jpg", import.meta.url).href, alt: "Media" },
+    { id: 11, src: new URL("../assets/media.png", import.meta.url).href, alt: "Media Marketing" },
     { id: 12, src: new URL("../assets/seo.png", import.meta.url).href, alt: "SEO" },
     { id: 13, src: new URL("../assets/vs.png", import.meta.url).href, alt: "Visual Studio" },
     { id: 17, src: new URL("../assets/Angular.png", import.meta.url).href, alt: "Angular" },

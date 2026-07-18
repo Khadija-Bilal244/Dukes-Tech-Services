@@ -2,6 +2,7 @@ import Seo from "../components/Seo.jsx";
 import ServicesHero from "../components/Services-Hero.jsx";
 import ServicesList from "../components/Services-List.jsx";
 import ServicesDetails from "../components/Services-Details.jsx";
+import WorkflowSection from "../components/Services-Workflow.jsx";
 export default function Services() {
   return (
     <>
@@ -12,6 +13,7 @@ export default function Services() {
       />
       <ServicesHero />
       <ServicesList />
+      <WorkflowSection />
       <ServicesDetails /> 
     </>
   );

@@ -160,7 +160,7 @@ export default function Contact() {
                         {item.link ? (
                           <a 
                             href={item.link} 
-                            className="font-sans text-[#1CA7B8] font-semibold hover:underline block mt-1"
+                            className="font-sans text-lg text-[#1CA7B8] font-semibold hover:underline block mt-1"
                           >
                             {item.value}
                           </a>
@@ -169,7 +169,7 @@ export default function Contact() {
                             {item.value}
                           </span>
                         )}
-                        <span className="font-sans text-sm text-[#0E2A43]/50 block mt-1">
+                        <span className="font-sans text-base text-[black] block mt-1">
                           {item.sub}
                         </span>
                       </div>
@@ -194,10 +194,10 @@ export default function Contact() {
                       Business Hours
                     </h4>
                     <div className="mt-2 space-y-1">
-                      <p className="font-sans text-sm text-[#0E2A43]/70">
+                      <p className="font-sans text-base text-black">
                         <span className="font-semibold">Mon - Fri:</span> 9:00 AM - 6:00 PM
                       </p>
-                      <p className="font-sans text-sm text-[#0E2A43]/70">
+                      <p className="font-sans text-base text-black">
                         <span className="font-semibold">Sat - Sun:</span> Closed
                       </p>
                     </div>
@@ -217,7 +217,7 @@ export default function Contact() {
                 <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
+                      <label className="text-base font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
                         Name <span className="text-[#1CA7B8]">*</span>
                       </label>
                       <input
@@ -231,7 +231,7 @@ export default function Contact() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
+                      <label className="text-base font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
                         Email <span className="text-[#1CA7B8]">*</span>
                       </label>
                       <input
@@ -247,7 +247,7 @@ export default function Contact() {
                   </div>
 
                   <div className="flex flex-col gap-2 mt-6">
-                    <label className="text-xs font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
+                    <label className="text-base font-bold uppercase tracking-wider text-[#0E2A43] font-sans">
                       Message <span className="text-[#1CA7B8]">*</span>
                     </label>
                     <textarea

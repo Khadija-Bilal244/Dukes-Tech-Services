@@ -29,7 +29,7 @@ import dotNetIcon from "../assets/.net.png";
 import adobeProIcon from "../assets/adobe pro.png";
 import wordpressIcon from "../assets/wordpress2.png";
 import githubIcon from "../assets/github.png";
-import mediaIcon from "../assets/media.jpg";
+import mediaIcon from "../assets/media.png";
 import seoIcon from "../assets/seo.png";
 import vsIcon from "../assets/vs.png";
 import angularIcon from "../assets/Angular.png";
@@ -261,7 +261,7 @@ export default function ServicesDetail() {
 
   return (
     <section className="bg-[#F2FAFB] py-8 sm:py-12 md:py-16 lg:py-20">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-4 md:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <span className="inline-block rounded-full bg-white px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs md:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/80">
@@ -274,7 +274,7 @@ export default function ServicesDetail() {
             <span className="inline-block h-1 w-8 sm:w-10 md:w-12 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-4 sm:w-5 md:w-6 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-3 sm:mt-4 text-[#0E2A43]/70 max-w-2xl mx-auto font-sans text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-2">
+          <p className="mt-3 sm:mt-4 text-black max-w-3xl mx-auto font-sans text-lg sm:text-sm md:text-base lg:text-lg leading-relaxed px-2">
             Whether you're launching a startup, expanding your business, or modernizing enterprise operations, 
             our comprehensive technology services are designed to solve complex challenges, streamline processes, 
             and accelerate growth.
@@ -303,7 +303,7 @@ export default function ServicesDetail() {
                       alt={service.title}
                       className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-72 lg:max-h-80 xl:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-1 sm:top-2 md:top-3 right-1 sm:right-2 md:right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-[8px] sm:text-xs font-bold px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full">
+                    <div className="absolute top-3 sm:top-4 md:top-5 right-3 sm:right-2 md:right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-[12px] sm:text-lg font-bold px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full">
                       {String(service.id).padStart(2, '0')}
                     </div>
                   </div>
