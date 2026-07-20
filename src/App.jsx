@@ -9,6 +9,9 @@ import Sectors from "./pages/Sectors.jsx";
 import Contact from "./pages/Contact.jsx";
 import Team from "./pages/Team.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import Dexo from "./pages/Dexo.jsx";
+
+
 export default function App() {
   return (
     <HelmetProvider>
@@ -19,6 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/dexo" element={<Dexo />} />
           <Route path="/sectors" element={<Sectors />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/team" element={<Team />} />
