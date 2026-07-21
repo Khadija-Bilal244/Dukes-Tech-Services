@@ -1,4 +1,4 @@
-// DexoHero.jsx - DEXO Hero Section with Full Responsiveness
+// DexoHero.jsx - DEXO Hero Section with Forced Dark Mode
 import { motion } from "framer-motion";
 import { ArrowRight, Store, Cloud, WifiOff, ShoppingCart, CreditCard, Sparkles } from "lucide-react";
 import dexoServicesImg from "../assets/dexo-hero2.png";
@@ -20,11 +20,11 @@ export default function DexoHero() {
         />
       </div>
 
-      {/* Dark Overlay - Responsive gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0E2A43]/80 via-[#0E2A43]/50 to-[#0E2A43]/10 dark:from-[#0a1628]/70 dark:via-[#0a1628]/50 dark:to-[#0a1628]/10 sm:from-[#0E2A43]/85 sm:via-[#0E2A43]/55 sm:to-[#0E2A43]/10 md:from-[#0E2A43]/90 md:via-[#0E2A43]/60 md:to-[#0E2A43]/10" />
+      {/* Dark Overlay - Always dark */}
+     <div className="absolute inset-0 bg-gradient-to-r from-[#0E2A43]/60 via-[#0E2A43]/40 to-[#0E2A43]/10 sm:from-[#0E2A43]/65 sm:via-[#0E2A43]/45 sm:to-[#0E2A43]/10 md:from-[#0E2A43]/70 md:via-[#0E2A43]/50 md:to-[#0E2A43]/10" />
 
       {/* Additional gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0E2A43]/30 via-transparent to-transparent sm:from-[#0E2A43]/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0E2A43]/40 via-transparent to-transparent sm:from-[#0E2A43]/50" />
 
       {/* Dot motifs - Hidden on mobile */}
       <div className="hidden sm:block absolute top-6 sm:top-10 left-6 sm:left-10 opacity-10 sm:opacity-15 z-10">

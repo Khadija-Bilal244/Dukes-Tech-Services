@@ -16,8 +16,10 @@ export default function Dexo() {
         <meta property="og:url" content="https://www.dukestechservices.com/dexo" />
       </Helmet>
 
-      <DexoHero />
-      <DexoCategories />
+      <div className="dexo-page">
+        <DexoHero />
+        <DexoCategories />
+      </div>
     </>
   );
 }

@@ -1,9 +1,9 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,46 +11,91 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
 }
-/* DEXO Dark Mode Specific Styles */
-.dark .dexoservices .bg-white {
+
+/* DEXO Dark Mode Styles - Always applied to dexo-page */
+.dexo-page {
+  background-color: #0a1628;
+  color: #e8f0fe;
+}
+
+.dexo-page .bg-white {
   background-color: #142a4a !important;
 }
 
-.dark .dexoservices .text-[#0E2A43] {
+.dexo-page .bg-[#F2FAFB] {
+  background-color: #0e1f3a !important;
+}
+
+.dexo-page .text-[#0E2A43] {
   color: #e8f0fe !important;
 }
 
-.dark .dexoservices .text-[#0E2A43]/60 {
+.dexo-page .text-[#0E2A43]/60,
+.dexo-page .text-[#0E2A43]/70,
+.dexo-page .text-[#0E2A43]/80 {
   color: #8aa8c8 !important;
 }
 
-.dark .dexoservices .border-[#0E2A43]/5 {
+.dexo-page .text-black {
+  color: #e8f0fe !important;
+}
+
+.dexo-page .border-[#0E2A43]/10,
+.dexo-page .border-[#0E2A43]/5 {
   border-color: #1a3a5a !important;
 }
 
-.dark .dexoservices .shadow-lg {
+.dexo-page .shadow-lg,
+.dexo-page .shadow-md,
+.dexo-page .shadow-xl {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
-.dark .dexoservices .shadow-md {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+.dexo-page .shadow-[#0E2A43]/5,
+.dexo-page .shadow-[#0E2A43]/10 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-.dark .dexoservices .hover\:shadow-xl:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* Dark mode for tab buttons */
-.dark .dexoservices .bg-[#F2FAFB] {
+.dexo-page .bg-[#F2FAFB].rounded-full {
   background-color: #0e1f3a !important;
 }
 
-/* Dark mode for benefit section */
-.dark .dexoservices .bg-[#F2FAFB].rounded-2xl {
+.dexo-page .bg-[#F2FAFB].rounded-2xl {
   background-color: #0e1f3a !important;
 }
 
-/* Dark mode for industry tags */
-.dark .dexoservices .bg-white.rounded-lg {
+.dexo-page .bg-white.rounded-lg {
   background-color: #142a4a !important;
+}
+
+.dexo-page .group .bg-white {
+  background-color: #142a4a !important;
+}
+
+.dexo-page .group .text-[#0E2A43] {
+  color: #e8f0fe !important;
+}
+
+.dexo-page .group .text-[#0E2A43]/60 {
+  color: #8aa8c8 !important;
+}
+
+.dexo-page .bg-[#F2FAFB].p-4 {
+  background-color: #0e1f3a !important;
+}
+
+.dexo-page .bg-[#F2FAFB].p-4 .text-[#0E2A43] {
+  color: #e8f0fe !important;
+}
+
+.dexo-page .bg-[#F2FAFB].p-4 .text-[#0E2A43]/60 {
+  color: #8aa8c8 !important;
+}
+
+.dexo-page .bg-gradient-to-r.from-\[#1CA7B8\]\/10 {
+  background-image: linear-gradient(to right, rgba(28, 167, 184, 0.2), rgba(14, 42, 67, 0.2)) !important;
+}
+
+.dexo-page .text-[#0E2A43] {
+  color: #e8f0fe !important;
 }

@@ -1,5 +1,5 @@
-// DexoCategories.jsx - DEXO POS & ERP Categories with Full Responsiveness
-import { useState } from "react";
+// DexoCategories.jsx - DEXO POS & ERP Categories with Forced Dark Mode
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { 
@@ -39,7 +39,12 @@ import {
   Calendar,
   DollarSign,
   Barcode,
-  Boxes
+  Boxes,
+  Store,
+  Utensils,
+  Coffee,
+  HeartPulse,
+  Dumbbell
 } from "lucide-react";
 import dexoLogo from "../assets/dexologo.png";
 
@@ -148,6 +153,121 @@ const reportModules = [
   { icon: Briefcase, title: "Business Performance Dashboard", description: "Monitor overall business performance" },
 ];
 
+// Quick-stat strip shown above the ERP module grids
+const erpStats = [
+  { icon: Layers, value: "7", label: "Integrated Modules" },
+  { icon: Zap, value: "80+", label: "Business Features" },
+  { icon: RefreshCw, value: "Real-Time", label: "Data Sync" },
+  { icon: Monitor, value: "1", label: "Unified Dashboard" },
+];
+
+// Each ERP category gets its own accent color so the grid isn't one flat wall of teal
+const erpCategories = [
+  { title: "Accounting & Finance", icon: Wallet, accent: "violet", modules: erpModules, cols: "lg:grid-cols-4" },
+  { title: "Point of Sale", icon: ShoppingCart, accent: "amber", modules: posModules, cols: "lg:grid-cols-4" },
+  { title: "Inventory Management", icon: Package, accent: "sky", modules: inventoryModules, cols: "lg:grid-cols-4" },
+  { title: "Purchase & Supplier Management", icon: Truck, accent: "rose", modules: purchaseModules, cols: "lg:grid-cols-3" },
+  { title: "Sales Management", icon: TrendingUp, accent: "emerald", modules: salesModules, cols: "lg:grid-cols-3" },
+  { title: "Employee Management", icon: UserCircle, accent: "indigo", modules: employeeModules, cols: "lg:grid-cols-3" },
+  { title: "Reporting & Analytics", icon: BarChart3, accent: "fuchsia", modules: reportModules, cols: "lg:grid-cols-4" },
+];
+
+// Tailwind classes per accent — badge fill, hover border, hover shadow glow
+const accentStyles = {
+  violet: {
+    badge: "bg-violet-500/20 text-violet-400",
+    border: "hover:border-violet-500/50",
+    shadow: "hover:shadow-violet-500/20",
+    panel: "bg-violet-500/[0.04] border-violet-500/20",
+  },
+  amber: {
+    badge: "bg-amber-500/20 text-amber-400",
+    border: "hover:border-amber-500/50",
+    shadow: "hover:shadow-amber-500/20",
+    panel: "bg-amber-500/[0.04] border-amber-500/20",
+  },
+  sky: {
+    badge: "bg-sky-500/20 text-sky-400",
+    border: "hover:border-sky-500/50",
+    shadow: "hover:shadow-sky-500/20",
+    panel: "bg-sky-500/[0.04] border-sky-500/20",
+  },
+  rose: {
+    badge: "bg-rose-500/20 text-rose-400",
+    border: "hover:border-rose-500/50",
+    shadow: "hover:shadow-rose-500/20",
+    panel: "bg-rose-500/[0.04] border-rose-500/20",
+  },
+  emerald: {
+    badge: "bg-emerald-500/20 text-emerald-400",
+    border: "hover:border-emerald-500/50",
+    shadow: "hover:shadow-emerald-500/20",
+    panel: "bg-emerald-500/[0.04] border-emerald-500/20",
+  },
+  indigo: {
+    badge: "bg-indigo-500/20 text-indigo-400",
+    border: "hover:border-indigo-500/50",
+    shadow: "hover:shadow-indigo-500/20",
+    panel: "bg-indigo-500/[0.04] border-indigo-500/20",
+  },
+  fuchsia: {
+    badge: "bg-fuchsia-500/20 text-fuchsia-400",
+    border: "hover:border-fuchsia-500/50",
+    shadow: "hover:shadow-fuchsia-500/20",
+    panel: "bg-fuchsia-500/[0.04] border-fuchsia-500/20",
+  },
+};
+
+// One category block: colored icon chip + title + feature count, then its module cards
+function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
+  const { title, icon: HeaderIcon, accent, modules, cols } = category;
+  const styles = accentStyles[accent];
+
+  return (
+    <div className={`rounded-2xl sm:rounded-3xl border ${styles.panel} p-4 sm:p-6 md:p-8 transition-colors duration-300`}>
+      <div className="flex items-center justify-between flex-wrap gap-2 mb-4 sm:mb-5">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className={`inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl ${styles.badge}`}>
+            <HeaderIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          </div>
+          <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-white transition-colors duration-300">
+            {title}
+          </h4>
+        </div>
+        <span className="font-sans text-[10px] sm:text-base font-semibold uppercase tracking-wider text-white/70">
+          {modules.length} Features
+        </span>
+      </div>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols} gap-3 sm:gap-4`}>
+        {modules.map((module, index) => {
+          const Icon = module.icon;
+          // Force re-render when activeTab changes
+          const key = `${module.title}-${activeTab}`;
+          return (
+            <motion.div
+              key={key}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+              transition={{ delay: catIndex * 0.04 + index * 0.03 }}
+              className={`group bg-[#142a4a] p-3.5 sm:p-4 rounded-xl border border-[#1a3a5a] ${styles.border} shadow-sm hover:shadow-lg ${styles.shadow} transition-all duration-300 hover:-translate-y-0.5`}
+            >
+              <div className={`inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg ${styles.badge} transition-transform duration-300 group-hover:scale-110`}>
+                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              </div>
+              <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-white transition-colors duration-300">
+                {module.title}
+              </h5>
+              <p className="mt-1 font-sans text-base sm:text-base md:text-base text-white/60 transition-colors duration-300">
+                {module.description}
+              </p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const onlineBenefits = [
   "Real-time inventory tracking",
   "Multi-store synchronization",
@@ -169,18 +289,23 @@ const offlineBenefits = [
 export default function DexoCategories() {
   const [activeTab, setActiveTab] = useState("online");
   const { ref, inView } = useInView({
-    triggerOnce: true,
+    triggerOnce: false, // Changed to false so it re-triggers
     threshold: 0.1,
   });
 
   const features = activeTab === "online" ? posFeatures.online : posFeatures.offline;
   const benefits = activeTab === "online" ? onlineBenefits : offlineBenefits;
 
+  // Force re-render when activeTab changes
+  useEffect(() => {
+    // This will trigger re-render of all modules
+  }, [activeTab]);
+
   return (
-    <section id="dexoservices" className="bg-white dark:bg-[#0a1628] py-12 sm:py-16 md:py-20 lg:py-24 transition-colors duration-300">
+    <section id="dexoservices" className="bg-[#0a1628] py-12 sm:py-16 md:py-20 lg:py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header - Fully Responsive */}
+        {/* Header - Always Dark */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
           <div className="flex items-center justify-center gap-3 sm:gap-5">
             <motion.img 
@@ -190,32 +315,32 @@ export default function DexoCategories() {
               whileHover={{ scale: 1.15, rotate: 5 }}
               transition={{ duration: 0.3 }}
             />
-            <span className="inline-block rounded-full bg-[#F2FAFB] dark:bg-[#0e1f3a] px-3 py-1 sm:px-4 sm:py-1.5 text-[10px] sm:text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/20 dark:border-[#1CA7B8]/40">
+            <span className="inline-block rounded-full bg-[#0e1f3a] px-3 py-1 sm:px-4 sm:py-1.5 text-[10px] sm:text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/40">
               DEXO Desktop ERP & POS
             </span>
           </div>
-          <h2 className="mt-3 sm:mt-4 font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
+          <h2 className="mt-3 sm:mt-4 font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white transition-colors duration-300">
             Choose Your <span className="text-[#1CA7B8]">POS Solution</span>
           </h2>
           <div className="flex justify-center gap-2 mt-2 sm:mt-3">
             <span className="inline-block h-1 w-10 sm:w-12 rounded-full bg-[#1CA7B8]" />
             <span className="inline-block h-1 w-4 sm:w-6 rounded-full bg-[#1CA7B8]/30" />
           </div>
-          <p className="mt-3 sm:mt-4 text-[#0E2A43]/60 dark:text-white max-w-2xl mx-auto font-sans text-sm sm:text-base lg:text-lg leading-relaxed transition-colors duration-300 px-4 sm:px-0">
+          <p className="mt-3 sm:mt-4 text-white/70 max-w-2xl mx-auto font-sans text-sm sm:text-base lg:text-lg leading-relaxed transition-colors duration-300 px-4 sm:px-0">
             Whether you need cloud-based management or reliable offline operations, 
             we have the perfect POS solution for your business.
           </p>
         </div>
 
-        {/* Tab Buttons - Responsive */}
+        {/* Tab Buttons - Always Dark */}
         <div className="flex justify-center mb-8 sm:mb-10">
-          <div className="inline-flex bg-[#F2FAFB] dark:bg-[#0e1f3a] rounded-full p-1 border border-[#1CA7B8]/10 dark:border-[#1CA7B8]/20 transition-colors duration-300">
+          <div className="inline-flex bg-[#0e1f3a] rounded-full p-1 border border-[#1CA7B8]/20 transition-colors duration-300">
             <button
               onClick={() => setActiveTab("online")}
               className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
                 activeTab === "online"
                   ? "bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] text-white shadow-lg shadow-[#1CA7B8]/25"
-                  : "text-[#0E2A43]/60 dark:text-gray-400 hover:text-[#0E2A43] dark:hover:text-white"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               <Cloud className="inline-block h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
@@ -226,7 +351,7 @@ export default function DexoCategories() {
               className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
                 activeTab === "offline"
                   ? "bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] text-white shadow-lg shadow-[#1CA7B8]/25"
-                  : "text-[#0E2A43]/60 dark:text-gray-400 hover:text-[#0E2A43] dark:hover:text-white"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               <WifiOff className="inline-block h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
@@ -235,10 +360,10 @@ export default function DexoCategories() {
           </div>
         </div>
 
-        {/* POS Features Grid - Responsive */}
+        {/* POS Features Grid - Always Dark */}
         <div ref={ref} className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16">
           <motion.div
-            key={activeTab}
+            key={`features-${activeTab}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -248,19 +373,19 @@ export default function DexoCategories() {
               const Icon = feature.icon;
               return (
                 <motion.div
-                  key={index}
+                  key={`${feature.title}-${activeTab}`}
                   initial={{ opacity: 0, scale: 0.95 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05 }}
-                  className="group bg-white dark:bg-[#142a4a] p-3 sm:p-4 md:p-5 rounded-xl shadow-md dark:shadow-[#0a1628] hover:shadow-xl dark:hover:shadow-[#1CA7B8]/20 transition-all duration-300 hover:-translate-y-1 border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50"
+                  className="group bg-[#142a4a] p-3 sm:p-4 md:p-5 rounded-xl shadow-md shadow-[#0a1628] hover:shadow-xl hover:shadow-[#1CA7B8]/20 transition-all duration-300 hover:-translate-y-1 border border-[#1a3a5a] hover:border-[#1CA7B8]/50"
                 >
-                  <div className="inline-flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8] transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#1CA7B8] group-hover:to-[#0E2A43] group-hover:text-white group-hover:scale-110">
+                  <div className="inline-flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center rounded-lg bg-[#1CA7B8]/20 text-[#1CA7B8] transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#1CA7B8] group-hover:to-[#0E2A43] group-hover:text-white group-hover:scale-110">
                     <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5" />
                   </div>
-                  <h3 className="mt-2 sm:mt-3 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
+                  <h3 className="mt-2 sm:mt-3 font-sans text-sm sm:text-base md:text-lg font-bold text-white transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="mt-1 font-sans text-base sm:text-sm md:text-base text-[#0E2A43]/60 dark:text-white/60 leading-relaxed transition-colors duration-300">
+                  <p className="mt-1 font-sans text-base sm:text-base md:text-base text-white/60 leading-relaxed transition-colors duration-300">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -273,22 +398,22 @@ export default function DexoCategories() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-[#F2FAFB] dark:bg-[#0e1f3a] rounded-2xl p-4 sm:p-6 md:p-8 transition-colors duration-300 hover:shadow-xl dark:hover:shadow-[#1CA7B8]/20 border border-transparent hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50"
+            className="bg-[#0e1f3a] rounded-2xl p-4 sm:p-6 md:p-8 transition-colors duration-300 hover:shadow-xl hover:shadow-[#1CA7B8]/20 border border-transparent hover:border-[#1CA7B8]/50"
           >
-            <h3 className="font-sans text-lg sm:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 transition-colors duration-300">
+            <h3 className="font-sans text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300">
               {activeTab === "online" ? "☁️ Online POS Benefits" : "📶 Offline POS Benefits"}
             </h3>
             <ul className="space-y-2 sm:space-y-3">
               {benefits.map((benefit, index) => (
                 <motion.li
-                  key={index}
+                  key={`${benefit}-${activeTab}`}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + (index * 0.05) }}
                   className="flex items-start gap-3"
                 >
                   <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8] flex-shrink-0 mt-0.5" />
-                  <span className="font-sans text-sm sm:text-base text-[#0E2A43]/80 dark:text-gray-300 transition-colors duration-300">
+                  <span className="font-sans text-sm sm:text-base text-gray-300 transition-colors duration-300">
                     {benefit}
                   </span>
                 </motion.li>
@@ -298,284 +423,183 @@ export default function DexoCategories() {
         </div>
 
         {/* ERP Modules Section */}
-        <div className="mt-12 sm:mt-16">
-          <h3 className="text-center font-sans text-xl sm:text-2xl md:text-3xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 transition-colors duration-300">
-            Complete <span className="text-[#1CA7B8]">ERP Modules</span>
-          </h3>
-          <p className="text-center text-[#0E2A43]/60 dark:text-white max-w-2xl mx-auto font-sans text-sm sm:text-base lg:text-lg mb-8 sm:mb-10 transition-colors duration-300 px-4 sm:px-0">
-            All-in-one business management solution with integrated modules for every aspect of your operations.
-          </p>
+        <div className="relative mt-16 sm:mt-20 lg:mt-24">
+          {/* Signature moment: dark dot-textured panel for the intro + stats, one bold accent for the whole section */}
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#050d1a] px-4 sm:px-8 md:px-12 py-10 sm:py-14 mb-12 sm:mb-16">
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.15]"
+              style={{
+                backgroundImage: "radial-gradient(circle, #1CA7B8 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
+              }}
+            />
+            <div className="pointer-events-none absolute -top-10 -left-10 h-56 w-56 rounded-full bg-[#1CA7B8]/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-10 -right-10 h-56 w-56 rounded-full bg-[#1CA7B8]/10 blur-3xl" />
 
-          {/* Accounting Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <Wallet className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Accounting & Finance
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {erpModules.map((module, index) => {
-                const Icon = module.icon;
+            <div className="relative text-center">
+              <span className="inline-block rounded-full bg-white/10 px-3 py-1 sm:px-4 sm:py-1.5 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.15em] text-[#5DCAA5] font-sans border border-[#1CA7B8]/30">
+                One Platform, Every Department
+              </span>
+              <h3 className="mt-3 sm:mt-4 font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                Complete <span className="text-[#5DCAA5]">ERP Modules</span>
+              </h3>
+              <div className="flex justify-center gap-2 mt-2 sm:mt-3">
+                <span className="inline-block h-1 w-10 sm:w-12 rounded-full bg-[#1CA7B8]" />
+                <span className="inline-block h-1 w-4 sm:w-6 rounded-full bg-[#1CA7B8]/30" />
+              </div>
+              <p className="mt-3 sm:mt-4 text-white/80 max-w-2xl mx-auto font-sans text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-0">
+                All-in-one business management solution with integrated modules for every aspect of your operations.
+              </p>
+            </div>
+
+            {/* Quick-stat strip — white cards floating on the dark panel */}
+            <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-8 sm:mt-10">
+              {erpStats.map((stat, index) => {
+                const Icon = stat.icon;
                 return (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
+                    key={`${stat.label}-${activeTab}`}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.08 }}
+                    className="bg-white/[0.06] backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-[#1CA7B8]/50 hover:bg-white/10 transition-all duration-300"
                   >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <div className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#1CA7B8]/20 text-[#5DCAA5] mb-2 sm:mb-3">
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
+                    <div className="font-sans text-lg sm:text-xl md:text-2xl font-bold text-white">
+                      {stat.value}
+                    </div>
+                    <div className="font-sans text-base sm:text-base text-white/60">
+                      {stat.label}
+                    </div>
                   </motion.div>
                 );
               })}
             </div>
           </div>
 
-          {/* POS Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Point of Sale
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {posModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Inventory Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <Package className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Inventory Management
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {inventoryModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Purchase Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Purchase & Supplier Management
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {purchaseModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Sales Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Sales Management
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {salesModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Employee Modules */}
-          <div className="mb-10 sm:mb-12">
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <UserCircle className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Employee Management
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {employeeModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Reports Modules */}
-          <div>
-            <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#0E2A43] dark:text-white mb-3 sm:mb-4 flex items-center gap-2 transition-colors duration-300">
-              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8]" />
-              Reporting & Analytics
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {reportModules.map((module, index) => {
-                const Icon = module.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-[#F2FAFB] dark:bg-[#0e1f3a] p-3 sm:p-4 rounded-xl border border-[#0E2A43]/5 dark:border-[#1a3a5a] hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 transition-all duration-300 hover:shadow-md dark:hover:shadow-[#1CA7B8]/20"
-                  >
-                    <div className="inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#1CA7B8]/10 dark:bg-[#1CA7B8]/20 text-[#1CA7B8]">
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                    </div>
-                    <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-[#0E2A43] dark:text-white transition-colors duration-300">
-                      {module.title}
-                    </h5>
-                    <p className="mt-1 font-sans text-base sm:text-sm text-[#0E2A43]/60 dark:text-white/60 transition-colors duration-300">
-                      {module.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Target Industries */}
-        <div className="mt-12 sm:mt-16 bg-[#F2FAFB] dark:bg-[#0e1f3a] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 transition-colors duration-300 hover:shadow-xl dark:hover:shadow-[#1CA7B8]/20 border border-transparent hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50">
-          <h3 className="text-center font-sans text-xl sm:text-2xl md:text-3xl font-bold text-[#0E2A43] dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
-            <span className="text-[#1CA7B8]">Target</span> Industries
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
-            {[
-              "Retail Stores",
-              "Wholesale Businesses",
-              "Distribution Companies",
-              "Supermarkets",
-              "Grocery Stores",
-              "Medical Stores",
-              "Restaurants",
-              "Cafés",
-              "Fitness Centers",
-              "Service Providers",
-              "Small Businesses",
-              "Medium Enterprises",
-              "Multi-Branch Organizations"
-            ].map((industry, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: index * 0.03 }}
-                className="bg-white dark:bg-[#142a4a] rounded-lg px-2 sm:px-4 py-2 sm:py-3 text-center shadow-sm dark:shadow-[#0a1628] hover:shadow-md dark:hover:shadow-[#1CA7B8]/40 transition-all duration-300 hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50 border border-transparent"
-              >
-                <span className="font-sans text-base sm:text-sm md:text-base font-medium text-[#0E2A43] dark:text-white transition-colors duration-300">
-                  {industry}
-                </span>
-              </motion.div>
+          {/* Category grids — each with its own accent color and feature count */}
+          <div className="relative space-y-10 sm:space-y-12">
+            {erpCategories.map((category, catIndex) => (
+              <ModuleCategoryBlock
+                key={`${category.title}-${activeTab}`}
+                category={category}
+                inView={inView}
+                catIndex={catIndex}
+                activeTab={activeTab}
+              />
             ))}
           </div>
         </div>
+          {/* Target Industries with Enhanced Glow */}
+          <div className="mt-12 sm:mt-16 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <span className="inline-block rounded-full bg-[#0e1f3a] px-3 py-1 sm:px-4 sm:py-1.5 text-[13px] sm:text-base md:text-base font-bold uppercase tracking-[0.15em] text-[#1CA7B8] font-sans border border-[#1CA7B8]/40">
+                Who Can Use DEXO
+              </span>
+              <h3 className="mt-3 sm:mt-4 font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-white transition-colors duration-300">
+                Built for <span className="text-[#1CA7B8]">Every Kind</span> of Business
+              </h3>
+              <p className="mt-3 font-sans text-base sm:text-lg md:text-xl text-white/70 leading-relaxed max-w-lg">
+                From a single storefront to a multi-branch operation, DEXO scales with the way your business actually runs.
+              </p>
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 sm:gap-y-4">
+                {[
+                  "Retail Stores",
+                  "Wholesale Businesses",
+                  "Distribution Companies",
+                  "Supermarkets",
+                  "Grocery Stores",
+                  "Medical Stores",
+                  "Restaurants",
+                  "Cafés",
+                  "Fitness Centers",
+                  "Service Providers",
+                  "Small Businesses",
+                  "Medium Enterprises",
+                  "Multi-Branch Organizations",
+                ].map((industry, index) => (
+                  <motion.div
+                    key={`${industry}-${activeTab}`}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.04 }}
+                    className="group relative flex items-center gap-2.5 sm:gap-3 p-2 sm:p-2.5 rounded-xl cursor-pointer transition-all duration-300 hover:bg-[#1CA7B8]/10 hover:scale-105 hover:shadow-xl hover:shadow-[#1CA7B8]/30 border border-transparent hover:border-[#1CA7B8]/40"
+                    whileHover={{
+                      scale: 1.05,
+                      x: 4,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    {/* Enhanced glow effect on hover */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#1CA7B8]/0 via-[#1CA7B8]/10 to-[#1CA7B8]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
+                    <div className="absolute -inset-1 rounded-xl bg-[#1CA7B8]/0 group-hover:bg-[#1CA7B8]/5 transition-all duration-500 blur-xl opacity-0 group-hover:opacity-100" />
+                    
+                    <span className="inline-flex h-5 w-5 sm:h-5.5 sm:w-5.5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/40">
+                      <CheckCircle className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" strokeWidth={3} />
+                    </span>
+                    <span className="font-sans text-base sm:text-lg md:text-xl font-medium text-white/80 group-hover:text-white transition-all duration-300 group-hover:translate-x-1">
+                      {industry}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Decorative icon cluster with enhanced hover */}
+            <div className="relative rounded-2xl sm:rounded-3xl bg-[#050d1a] overflow-hidden p-8 sm:p-10 min-h-[280px] sm:min-h-[340px] flex items-center justify-center">
+              <div className="pointer-events-none absolute -top-10 -left-10 h-40 w-40 sm:h-56 sm:w-56 rounded-full bg-[#1CA7B8] opacity-30 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-14 -right-10 h-44 w-44 sm:h-64 sm:w-64 rounded-full bg-violet-500 opacity-30 blur-3xl" />
+              <div className="relative grid grid-cols-3 gap-4 sm:gap-6">
+                {[
+                  { icon: Store, label: "Retail", color: "hover:shadow-[#1CA7B8]/40" },
+                  { icon: Utensils, label: "Dining", color: "hover:shadow-[#F59E0B]/40" },
+                  { icon: Coffee, label: "Cafés", color: "hover:shadow-[#FBBF24]/40" },
+                  { icon: HeartPulse, label: "Medical", color: "hover:shadow-[#F43F5E]/40" },
+                  { icon: Building2, label: "Hotels", color: "hover:shadow-[#A78BFA]/40" },
+                  { icon: Dumbbell, label: "Fitness", color: "hover:shadow-[#34D399]/40" },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={`${item.label}-${activeTab}`}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15 + index * 0.08 }}
+                      className={`group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer hover:scale-110 hover:-translate-y-1 hover:shadow-2xl ${item.color}`}
+                      whileHover={{
+                        scale: 1.1,
+                        y: -4,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      {/* Icon glow on hover */}
+                      <div className="relative">
+                        <div className="absolute inset-0 rounded-2xl bg-[#1CA7B8]/0 group-hover:bg-[#1CA7B8]/10 transition-all duration-500 blur-xl opacity-0 group-hover:opacity-100" />
+                        <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-[#5DCAA5] transition-all duration-300 group-hover:bg-[#1CA7B8]/20 group-hover:border-[#1CA7B8]/40 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-[#1CA7B8]/30 relative z-10">
+                          <Icon className="h-5 w-5 sm:h-6 sm:w-6 transition-all duration-300 group-hover:scale-110 group-hover:text-[#5DCAA5]" />
+                        </div>
+                      </div>
+                      <span className="font-sans text-[11px] sm:text-xs text-white/40 group-hover:text-white/90 transition-all duration-300 group-hover:font-medium">
+                        {item.label}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
         {/* CTA Section */}
         <div className="mt-12 sm:mt-16 text-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-3xl bg-gradient-to-r from-[#1CA7B8]/10 to-[#0E2A43]/10 dark:from-[#1CA7B8]/20 dark:to-[#0E2A43]/20 px-4 sm:px-6 md:px-8 py-4 sm:py-6 border border-[#1CA7B8]/20 dark:border-[#1CA7B8]/40 transition-colors duration-300 hover:shadow-xl dark:hover:shadow-[#1CA7B8]/20 hover:border-[#1CA7B8]/40 dark:hover:border-[#1CA7B8]/50">
-            <span className="font-sans text-sm sm:text-base md:text-lg font-semibold text-[#0E2A43] dark:text-white transition-colors duration-300">
-             Ready to streamline your business operations?
+          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-3xl bg-gradient-to-r from-[#1CA7B8]/20 to-[#0E2A43]/20 px-4 sm:px-6 md:px-8 py-4 sm:py-6 border border-[#1CA7B8]/40 transition-colors duration-300 hover:shadow-xl hover:shadow-[#1CA7B8]/20 hover:border-[#1CA7B8]/50">
+            <span className="font-sans text-base sm:text-base md:text-lg font-semibold text-white transition-colors duration-300">
+               Ready to streamline your business operations?
             </span>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] dark:from-[#1CA7B8] dark:to-[#0E2A43] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base font-semibold text-white shadow-lg shadow-[#1CA7B8]/25 dark:shadow-[#1CA7B8]/40 hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base font-semibold text-white shadow-lg shadow-[#1CA7B8]/40 hover:scale-105 transition-transform"
             >
               Get Started with DEXO
               <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
