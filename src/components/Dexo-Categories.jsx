@@ -47,6 +47,16 @@ import {
   Dumbbell
 } from "lucide-react";
 import dexoLogo from "../assets/dexologo.png";
+import accountingImg from "../assets/accounting & finance.png";
+import employeeImg from "../assets/Employee Management.png";
+import inventoryImg from "../assets/Inventory Management.png";
+import offlinePosImg from "../assets/Offline POS.png";
+import onlinePosImg from "../assets/Online POS.png";
+import posModuleImg from "../assets/POS.png";
+import purchaseImg from "../assets/Purchase & Supplier Management.png";
+import reportsImg from "../assets/Reporting & Analytics.png";
+import salesImg from "../assets/Sales Management.png";
+import targetBusinessesImg from "../assets/Target Businesses.png";
 
 const posFeatures = {
   online: [
@@ -163,13 +173,13 @@ const erpStats = [
 
 // Each ERP category gets its own accent color so the grid isn't one flat wall of teal
 const erpCategories = [
-  { title: "Accounting & Finance", icon: Wallet, accent: "violet", modules: erpModules, cols: "lg:grid-cols-4" },
-  { title: "Point of Sale", icon: ShoppingCart, accent: "amber", modules: posModules, cols: "lg:grid-cols-4" },
-  { title: "Inventory Management", icon: Package, accent: "sky", modules: inventoryModules, cols: "lg:grid-cols-4" },
-  { title: "Purchase & Supplier Management", icon: Truck, accent: "rose", modules: purchaseModules, cols: "lg:grid-cols-3" },
-  { title: "Sales Management", icon: TrendingUp, accent: "emerald", modules: salesModules, cols: "lg:grid-cols-3" },
-  { title: "Employee Management", icon: UserCircle, accent: "indigo", modules: employeeModules, cols: "lg:grid-cols-3" },
-  { title: "Reporting & Analytics", icon: BarChart3, accent: "fuchsia", modules: reportModules, cols: "lg:grid-cols-4" },
+  { title: "Accounting & Finance", icon: Wallet, accent: "violet", modules: erpModules, cols: "lg:grid-cols-4", image: accountingImg },
+  { title: "Point of Sale", icon: ShoppingCart, accent: "amber", modules: posModules, cols: "lg:grid-cols-4", image: posModuleImg },
+  { title: "Inventory Management", icon: Package, accent: "sky", modules: inventoryModules, cols: "lg:grid-cols-4", image: inventoryImg },
+  { title: "Purchase & Supplier Management", icon: Truck, accent: "rose", modules: purchaseModules, cols: "lg:grid-cols-3", image: purchaseImg },
+  { title: "Sales Management", icon: TrendingUp, accent: "emerald", modules: salesModules, cols: "lg:grid-cols-3", image: salesImg },
+  { title: "Employee Management", icon: UserCircle, accent: "indigo", modules: employeeModules, cols: "lg:grid-cols-3", image: employeeImg },
+  { title: "Reporting & Analytics", icon: BarChart3, accent: "fuchsia", modules: reportModules, cols: "lg:grid-cols-4", image: reportsImg },
 ];
 
 // Tailwind classes per accent — badge fill, hover border, hover shadow glow
@@ -220,12 +230,12 @@ const accentStyles = {
 
 // One category block: colored icon chip + title + feature count, then its module cards
 function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
-  const { title, icon: HeaderIcon, accent, modules, cols } = category;
+  const { title, icon: HeaderIcon, accent, modules, cols, image } = category;
   const styles = accentStyles[accent];
 
-  return (
-    <div className={`rounded-2xl sm:rounded-3xl border ${styles.panel} p-4 sm:p-6 md:p-8 transition-colors duration-300`}>
-      <div className="flex items-center justify-between flex-wrap gap-2 mb-4 sm:mb-5">
+  const contentPane = (
+    <div className="flex-1 min-w-0">
+      <div className="flex items-start justify-between flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-5">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className={`inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl ${styles.badge}`}>
             <HeaderIcon className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -234,9 +244,27 @@ function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
             {title}
           </h4>
         </div>
-        <span className="font-sans text-[10px] sm:text-base font-semibold uppercase tracking-wider text-white/70">
-          {modules.length} Features
-        </span>
+
+        {/* Thumbnail + feature count, top-right of the heading — keeps the grid below at full width */}
+        <div className="flex flex-col items-end gap-1.5 sm:gap-2 flex-shrink-0">
+          <span className="font-sans text-[10px] sm:text-base font-semibold uppercase tracking-wider text-white/70">
+            {modules.length} Features
+          </span>
+          {image && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+              transition={{ delay: catIndex * 0.04, duration: 0.4 }}
+              className="h-16 w-24 sm:h-20 sm:w-32 md:h-24 md:w-40 flex-shrink-0 overflow-hidden rounded-lg sm:rounded-xl border border-white/10 shadow-md shadow-black/20"
+            >
+              <img
+                src={image}
+                alt={`${title} illustration`}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          )}
+        </div>
       </div>
       <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols} gap-3 sm:gap-4`}>
         {modules.map((module, index) => {
@@ -264,6 +292,12 @@ function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
           );
         })}
       </div>
+    </div>
+  );
+
+  return (
+    <div className={`rounded-2xl sm:rounded-3xl border ${styles.panel} p-4 sm:p-6 md:p-8 transition-colors duration-300`}>
+      {contentPane}
     </div>
   );
 }
@@ -400,6 +434,13 @@ export default function DexoCategories() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-[#0e1f3a] rounded-2xl p-4 sm:p-6 md:p-8 transition-colors duration-300 hover:shadow-xl hover:shadow-[#1CA7B8]/20 border border-transparent hover:border-[#1CA7B8]/50"
           >
+            <div className="mb-4 sm:mb-5 overflow-hidden rounded-xl sm:rounded-2xl border border-white/5">
+              <img
+                src={activeTab === "online" ? onlinePosImg : offlinePosImg}
+                alt={activeTab === "online" ? "Online POS illustration" : "Offline POS illustration"}
+                className="w-full h-32 sm:h-40 md:h-48 object-cover"
+              />
+            </div>
             <h3 className="font-sans text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300">
               {activeTab === "online" ? "☁️ Online POS Benefits" : "📶 Offline POS Benefits"}
             </h3>
@@ -547,8 +588,14 @@ export default function DexoCategories() {
               </div>
             </div>
 
-            {/* Decorative icon cluster with enhanced hover */}
-            <div className="relative rounded-2xl sm:rounded-3xl bg-[#050d1a] overflow-hidden p-8 sm:p-10 min-h-[280px] sm:min-h-[340px] flex items-center justify-center">
+            {/* Decorative icon cluster with enhanced hover, over the Target Businesses photo */}
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden p-8 sm:p-10 min-h-[280px] sm:min-h-[340px] flex items-center justify-center">
+              <img
+                src={targetBusinessesImg}
+                alt="Businesses that use DEXO"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-[#050d1a]/75" />
               <div className="pointer-events-none absolute -top-10 -left-10 h-40 w-40 sm:h-56 sm:w-56 rounded-full bg-[#1CA7B8] opacity-30 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-14 -right-10 h-44 w-44 sm:h-64 sm:w-64 rounded-full bg-violet-500 opacity-30 blur-3xl" />
               <div className="relative grid grid-cols-3 gap-4 sm:gap-6">
