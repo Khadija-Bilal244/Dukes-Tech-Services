@@ -44,7 +44,9 @@ import {
   Utensils,
   Coffee,
   HeartPulse,
-  Dumbbell
+  Dumbbell,
+  Maximize2,
+  Minimize2
 } from "lucide-react";
 import dexoLogo from "../assets/dexologo.png";
 import accountingImg from "../assets/accounting & finance.png";
@@ -171,15 +173,15 @@ const erpStats = [
   { icon: Monitor, value: "1", label: "Unified Dashboard" },
 ];
 
-// Each ERP category gets its own accent color so the grid isn't one flat wall of teal
+// Each ERP category gets its own accent color - ALTERNATING IMAGE POSITION
 const erpCategories = [
-  { title: "Accounting & Finance", icon: Wallet, accent: "violet", modules: erpModules, cols: "lg:grid-cols-4", image: accountingImg },
-  { title: "Point of Sale", icon: ShoppingCart, accent: "amber", modules: posModules, cols: "lg:grid-cols-4", image: posModuleImg },
-  { title: "Inventory Management", icon: Package, accent: "sky", modules: inventoryModules, cols: "lg:grid-cols-4", image: inventoryImg },
-  { title: "Purchase & Supplier Management", icon: Truck, accent: "rose", modules: purchaseModules, cols: "lg:grid-cols-3", image: purchaseImg },
-  { title: "Sales Management", icon: TrendingUp, accent: "emerald", modules: salesModules, cols: "lg:grid-cols-3", image: salesImg },
-  { title: "Employee Management", icon: UserCircle, accent: "indigo", modules: employeeModules, cols: "lg:grid-cols-3", image: employeeImg },
-  { title: "Reporting & Analytics", icon: BarChart3, accent: "fuchsia", modules: reportModules, cols: "lg:grid-cols-4", image: reportsImg },
+  { title: "Accounting & Finance", icon: Wallet, accent: "violet", modules: erpModules, cols: "lg:grid-cols-2", image: accountingImg, imagePosition: "left" },
+  { title: "Point of Sale", icon: ShoppingCart, accent: "amber", modules: posModules, cols: "lg:grid-cols-2", image: posModuleImg, imagePosition: "right" },
+  { title: "Inventory Management", icon: Package, accent: "sky", modules: inventoryModules, cols: "lg:grid-cols-2", image: inventoryImg, imagePosition: "left" },
+  { title: "Purchase & Supplier Management", icon: Truck, accent: "rose", modules: purchaseModules, cols: "lg:grid-cols-2", image: purchaseImg, imagePosition: "right" },
+  { title: "Sales Management", icon: TrendingUp, accent: "emerald", modules: salesModules, cols: "lg:grid-cols-2", image: salesImg, imagePosition: "left" },
+  { title: "Employee Management", icon: UserCircle, accent: "indigo", modules: employeeModules, cols: "lg:grid-cols-2", image: employeeImg, imagePosition: "right" },
+  { title: "Reporting & Analytics", icon: BarChart3, accent: "fuchsia", modules: reportModules, cols: "lg:grid-cols-2", image: reportsImg, imagePosition: "left" },
 ];
 
 // Tailwind classes per accent — badge fill, hover border, hover shadow glow
@@ -189,87 +191,164 @@ const accentStyles = {
     border: "hover:border-violet-500/50",
     shadow: "hover:shadow-violet-500/20",
     panel: "bg-violet-500/[0.04] border-violet-500/20",
+    hover: "hover:bg-violet-500/10",
+    glow: "hover:shadow-violet-500/30",
   },
   amber: {
     badge: "bg-amber-500/20 text-amber-400",
     border: "hover:border-amber-500/50",
     shadow: "hover:shadow-amber-500/20",
     panel: "bg-amber-500/[0.04] border-amber-500/20",
+    hover: "hover:bg-amber-500/10",
+    glow: "hover:shadow-amber-500/30",
   },
   sky: {
     badge: "bg-sky-500/20 text-sky-400",
     border: "hover:border-sky-500/50",
     shadow: "hover:shadow-sky-500/20",
     panel: "bg-sky-500/[0.04] border-sky-500/20",
+    hover: "hover:bg-sky-500/10",
+    glow: "hover:shadow-sky-500/30",
   },
   rose: {
     badge: "bg-rose-500/20 text-rose-400",
     border: "hover:border-rose-500/50",
     shadow: "hover:shadow-rose-500/20",
     panel: "bg-rose-500/[0.04] border-rose-500/20",
+    hover: "hover:bg-rose-500/10",
+    glow: "hover:shadow-rose-500/30",
   },
   emerald: {
     badge: "bg-emerald-500/20 text-emerald-400",
     border: "hover:border-emerald-500/50",
     shadow: "hover:shadow-emerald-500/20",
     panel: "bg-emerald-500/[0.04] border-emerald-500/20",
+    hover: "hover:bg-emerald-500/10",
+    glow: "hover:shadow-emerald-500/30",
   },
   indigo: {
     badge: "bg-indigo-500/20 text-indigo-400",
     border: "hover:border-indigo-500/50",
     shadow: "hover:shadow-indigo-500/20",
     panel: "bg-indigo-500/[0.04] border-indigo-500/20",
+    hover: "hover:bg-indigo-500/10",
+    glow: "hover:shadow-indigo-500/30",
   },
   fuchsia: {
     badge: "bg-fuchsia-500/20 text-fuchsia-400",
     border: "hover:border-fuchsia-500/50",
     shadow: "hover:shadow-fuchsia-500/20",
     panel: "bg-fuchsia-500/[0.04] border-fuchsia-500/20",
+    hover: "hover:bg-fuchsia-500/10",
+    glow: "hover:shadow-fuchsia-500/30",
   },
 };
 
 // One category block: colored icon chip + title + feature count, then its module cards
 function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
-  const { title, icon: HeaderIcon, accent, modules, cols, image } = category;
+  const { title, icon: HeaderIcon, accent, modules, cols, image, imagePosition } = category;
   const styles = accentStyles[accent];
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // Determine alignment classes based on image position
+  const getAlignmentClasses = () => {
+    if (imagePosition === "right") {
+      return {
+        container: "sm:flex-row-reverse",
+        titleSection: "sm:text-right sm:items-end",
+        titleFlex: "sm:flex-row-reverse",
+        badge: "sm:ml-3",
+        description: "sm:ml-auto",
+        featureBadge: "sm:flex-row-reverse",
+        clickHint: "sm:justify-end"
+      };
+    }
+    return {
+      container: "",
+      titleSection: "",
+      titleFlex: "",
+      badge: "",
+      description: "",
+      featureBadge: "",
+      clickHint: ""
+    };
+  };
+
+  const align = getAlignmentClasses();
 
   const contentPane = (
     <div className="flex-1 min-w-0">
-      <div className="flex items-start justify-between flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-5">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className={`inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl ${styles.badge}`}>
-            <HeaderIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-          </div>
-          <h4 className="font-sans text-base sm:text-lg md:text-xl font-bold text-white transition-colors duration-300">
-            {title}
-          </h4>
-        </div>
-
-        {/* Thumbnail + feature count, top-right of the heading — keeps the grid below at full width */}
-        <div className="flex flex-col items-end gap-1.5 sm:gap-2 flex-shrink-0">
-          <span className="font-sans text-[10px] sm:text-base font-semibold uppercase tracking-wider text-white/70">
-            {modules.length} Features
-          </span>
-          {image && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
-              transition={{ delay: catIndex * 0.04, duration: 0.4 }}
-              className="h-16 w-24 sm:h-20 sm:w-32 md:h-24 md:w-40 flex-shrink-0 overflow-hidden rounded-lg sm:rounded-xl border border-white/10 shadow-md shadow-black/20"
-            >
+      {/* Header with Image - ALTERNATING POSITION */}
+      <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 ${align.container}`}>
+        {/* Image Section - Clickable with hover effect */}
+        {image && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+            transition={{ delay: catIndex * 0.04, duration: 0.4 }}
+            className={`w-full sm:w-72 md:w-96 lg:w-[420px] xl:w-[480px] flex-shrink-0 overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 shadow-lg shadow-black/30 transition-all duration-300 cursor-pointer ${
+              isExpanded 
+                ? `scale-105 ${styles.glow} shadow-2xl ${styles.hover} border-${accent}-500/50` 
+                : `hover:scale-[1.02] hover:shadow-xl hover:${styles.glow} ${styles.hover}`
+            }`}
+            onClick={toggleExpand}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <div className="relative">
               <img
                 src={image}
                 alt={`${title} illustration`}
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain bg-[#0a1628]"
               />
-            </motion.div>
-          )}
+              {/* Expand indicator badge - small, subtle */}
+              <div className={`absolute top-2 right-2 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full transition-all duration-300 ${
+                isExpanded ? 'opacity-100 scale-110' : 'opacity-0 group-hover:opacity-70'
+              }`}>
+                {isExpanded ? (
+                  <Minimize2 className="h-3 w-3 text-white" />
+                ) : (
+                  <Maximize2 className="h-3 w-3 text-white" />
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+        
+        {/* Title and Info Section - with right alignment when image is on right */}
+        <div className={`flex-1 flex flex-col justify-center ${align.titleSection}`}>
+          <div className={`flex items-center gap-3 mb-2 ${align.titleFlex}`}>
+            <div className={`inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl ${styles.badge} ${align.badge}`}>
+              <HeaderIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+            </div>
+            <h4 className="font-sans text-xl sm:text-2xl md:text-3xl font-bold text-white transition-colors duration-300">
+              {title}
+            </h4>
+          </div>
+          <div className={`flex items-center gap-4 mt-1 ${align.featureBadge}`}>
+            <span className="font-sans text-sm sm:text-base font-semibold uppercase tracking-wider text-white/60">
+              {modules.length} Features
+            </span>
+            <span className="h-1 w-8 rounded-full bg-[#1CA7B8]/40" />
+            <span className="font-sans text-sm sm:text-base text-[#1CA7B8]">
+              Integrated Module
+            </span>
+          </div>
+          {/* 🔵 INCREASED TEXT SIZE - Description next to image */}
+          <p className={`mt-3 font-sans text-base sm:text-lg md:text-xl text-white/50 max-w-md ${align.description}`}>
+            Complete {title.toLowerCase()} solution for your business operations
+          </p>
         </div>
       </div>
+
+      {/* Features Grid - 2 COLUMNS PER ROW */}
       <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols} gap-3 sm:gap-4`}>
         {modules.map((module, index) => {
           const Icon = module.icon;
-          // Force re-render when activeTab changes
           const key = `${module.title}-${activeTab}`;
           return (
             <motion.div
@@ -277,15 +356,19 @@ function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: catIndex * 0.04 + index * 0.03 }}
-              className={`group bg-[#142a4a] p-3.5 sm:p-4 rounded-xl border border-[#1a3a5a] ${styles.border} shadow-sm hover:shadow-lg ${styles.shadow} transition-all duration-300 hover:-translate-y-0.5`}
+              className={`group bg-[#142a4a] p-4 sm:p-5 rounded-xl border border-[#1a3a5a] ${styles.border} shadow-sm hover:shadow-lg ${styles.shadow} transition-all duration-300 hover:-translate-y-1 cursor-pointer ${styles.hover}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className={`inline-flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg ${styles.badge} transition-transform duration-300 group-hover:scale-110`}>
-                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <div className={`inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg ${styles.badge} transition-transform duration-300 group-hover:scale-110`}>
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <h5 className="mt-2 font-sans text-sm sm:text-base md:text-lg font-bold text-white transition-colors duration-300">
+              {/* 🔵 INCREASED TEXT SIZE - Feature titles */}
+              <h5 className="mt-2 font-sans text-base sm:text-lg md:text-xl font-bold text-white transition-colors duration-300 group-hover:text-[#1CA7B8]">
                 {module.title}
               </h5>
-              <p className="mt-1 font-sans text-base sm:text-base md:text-base text-white/60 transition-colors duration-300">
+              {/* 🔵 INCREASED TEXT SIZE - Feature descriptions */}
+              <p className="mt-1 font-sans text-sm sm:text-base md:text-lg text-white/60 transition-colors duration-300 group-hover:text-white/80">
                 {module.description}
               </p>
             </motion.div>
@@ -296,9 +379,17 @@ function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
   );
 
   return (
-    <div className={`rounded-2xl sm:rounded-3xl border ${styles.panel} p-4 sm:p-6 md:p-8 transition-colors duration-300`}>
+    <motion.div 
+      className={`rounded-2xl sm:rounded-3xl border ${styles.panel} p-4 sm:p-6 md:p-8 transition-all duration-300 ${
+        isExpanded ? `shadow-2xl ${styles.glow} border-${accent}-500/30` : ''
+      }`}
+      animate={{
+        scale: isExpanded ? 1.01 : 1,
+      }}
+      transition={{ duration: 0.3 }}
+    >
       {contentPane}
-    </div>
+    </motion.div>
   );
 }
 
@@ -323,14 +414,13 @@ const offlineBenefits = [
 export default function DexoCategories() {
   const [activeTab, setActiveTab] = useState("online");
   const { ref, inView } = useInView({
-    triggerOnce: false, // Changed to false so it re-triggers
+    triggerOnce: false,
     threshold: 0.1,
   });
 
   const features = activeTab === "online" ? posFeatures.online : posFeatures.offline;
   const benefits = activeTab === "online" ? onlineBenefits : offlineBenefits;
 
-  // Force re-render when activeTab changes
   useEffect(() => {
     // This will trigger re-render of all modules
   }, [activeTab]);
@@ -411,15 +501,17 @@ export default function DexoCategories() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05 }}
-                  className="group bg-[#142a4a] p-3 sm:p-4 md:p-5 rounded-xl shadow-md shadow-[#0a1628] hover:shadow-xl hover:shadow-[#1CA7B8]/20 transition-all duration-300 hover:-translate-y-1 border border-[#1a3a5a] hover:border-[#1CA7B8]/50"
+                  className="group bg-[#142a4a] p-3 sm:p-4 md:p-5 rounded-xl shadow-md shadow-[#0a1628] hover:shadow-xl hover:shadow-[#1CA7B8]/20 transition-all duration-300 hover:-translate-y-1 border border-[#1a3a5a] hover:border-[#1CA7B8]/50 cursor-pointer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <div className="inline-flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center rounded-lg bg-[#1CA7B8]/20 text-[#1CA7B8] transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#1CA7B8] group-hover:to-[#0E2A43] group-hover:text-white group-hover:scale-110">
                     <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5" />
                   </div>
-                  <h3 className="mt-2 sm:mt-3 font-sans text-sm sm:text-base md:text-lg font-bold text-white transition-colors duration-300">
+                  <h3 className="mt-2 sm:mt-3 font-sans text-sm sm:text-base md:text-lg font-bold text-white transition-colors duration-300 group-hover:text-[#1CA7B8]">
                     {feature.title}
                   </h3>
-                  <p className="mt-1 font-sans text-base sm:text-base md:text-base text-white/60 leading-relaxed transition-colors duration-300">
+                  <p className="mt-1 font-sans text-sm sm:text-base text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/80">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -434,11 +526,12 @@ export default function DexoCategories() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-[#0e1f3a] rounded-2xl p-4 sm:p-6 md:p-8 transition-colors duration-300 hover:shadow-xl hover:shadow-[#1CA7B8]/20 border border-transparent hover:border-[#1CA7B8]/50"
           >
-            <div className="mb-4 sm:mb-5 overflow-hidden rounded-xl sm:rounded-2xl border border-white/5">
+            {/* POS Image - PROPER ASPECT RATIO */}
+            <div className="mb-4 sm:mb-5 overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 bg-[#0a1628]">
               <img
                 src={activeTab === "online" ? onlinePosImg : offlinePosImg}
                 alt={activeTab === "online" ? "Online POS illustration" : "Offline POS illustration"}
-                className="w-full h-32 sm:h-40 md:h-48 object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
             <h3 className="font-sans text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300">
@@ -451,10 +544,10 @@ export default function DexoCategories() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + (index * 0.05) }}
-                  className="flex items-start gap-3"
+                  className="flex items-start gap-3 group cursor-pointer hover:pl-2 transition-all duration-300"
                 >
-                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8] flex-shrink-0 mt-0.5" />
-                  <span className="font-sans text-sm sm:text-base text-gray-300 transition-colors duration-300">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-all duration-300 group-hover:scale-110 group-hover:text-[#5DCAA5]" />
+                  <span className="font-sans text-sm sm:text-base text-gray-300 transition-colors duration-300 group-hover:text-white">
                     {benefit}
                   </span>
                 </motion.li>
@@ -503,15 +596,17 @@ export default function DexoCategories() {
                     initial={{ opacity: 0, y: 16 }}
                     animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.08 }}
-                    className="bg-white/[0.06] backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-[#1CA7B8]/50 hover:bg-white/10 transition-all duration-300"
+                    className="bg-white/[0.06] backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-[#1CA7B8]/50 hover:bg-white/10 transition-all duration-300 cursor-pointer hover:scale-105 hover:-translate-y-1"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <div className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#1CA7B8]/20 text-[#5DCAA5] mb-2 sm:mb-3">
+                    <div className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#1CA7B8]/20 text-[#5DCAA5] mb-2 sm:mb-3 transition-all duration-300 group-hover:scale-110">
                       <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div className="font-sans text-lg sm:text-xl md:text-2xl font-bold text-white">
                       {stat.value}
                     </div>
-                    <div className="font-sans text-base sm:text-base text-white/60">
+                    <div className="font-sans text-sm sm:text-base text-white/60">
                       {stat.label}
                     </div>
                   </motion.div>
@@ -572,6 +667,7 @@ export default function DexoCategories() {
                       x: 4,
                       transition: { duration: 0.2 }
                     }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {/* Enhanced glow effect on hover */}
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#1CA7B8]/0 via-[#1CA7B8]/10 to-[#1CA7B8]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
@@ -620,6 +716,7 @@ export default function DexoCategories() {
                         y: -4,
                         transition: { duration: 0.3 }
                       }}
+                      whileTap={{ scale: 0.9 }}
                     >
                       {/* Icon glow on hover */}
                       <div className="relative">
@@ -647,6 +744,8 @@ export default function DexoCategories() {
             <a
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base font-semibold text-white shadow-lg shadow-[#1CA7B8]/40 hover:scale-105 transition-transform"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Get Started with DEXO
               <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
