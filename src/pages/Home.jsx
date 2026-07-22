@@ -9,6 +9,7 @@ import Sectors from "../components/Sectors.jsx";
 import TeamHome from "../components/Team-home.jsx";
 import FAQ from "../components/FAQ.jsx";
 import Contact from "../components/Home-Contact.jsx";
+import DigitalEcosystem from "../components/DigitalEcoSystem.jsx";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <Slogan />
       <Workflow />
+      <DigitalEcosystem/>
       <Services/>
       <WhyChooseUs/>
       <MovingBanner/>

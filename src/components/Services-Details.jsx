@@ -253,12 +253,100 @@ const servicesData = [
   }
 ];
 
-export default function ServicesDetail() {
+function ServiceCard({ service, index }) {
+  const isEven = index % 2 === 0;
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ delay: 0.1 }}
+      className={`relative flex flex-col ${
+        isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
+      } gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/20 group`}
+    >
+      {/* Image */}
+      <div className="flex-shrink-0 w-full lg:w-2/5">
+        <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-[#F2FAFB]">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-72 lg:max-h-80 xl:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute top-3 sm:top-4 md:top-5 right-3 sm:right-2 md:right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-[12px] sm:text-lg font-bold px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full">
+            {String(service.id).padStart(2, '0')}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 w-full">
+        <h3 className="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0E2A43]">
+          {service.title}
+        </h3>
+        
+        <p className="mt-1 sm:mt-2 font-sans text-base sm:text-lg md:text-xl font-semibold text-[#1CA7B8]">
+          {service.subtitle}
+        </p>
+        
+        <p className="mt-2 sm:mt-3 md:mt-4 font-sans text-xs sm:text-sm md:text-base lg:text-lg text-black/90 leading-relaxed">
+          {service.description}
+        </p>
+        
+        {/* Technology Icons - Larger & Responsive */}
+        <div className="mt-3 sm:mt-4 md:mt-6">
+          <h4 className="font-sans text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black mb-1.5 sm:mb-2 md:mb-3">
+            Technologies We Use
+          </h4>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
+            {service.techIcons.map((icon, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-white rounded-md sm:rounded-lg md:rounded-xl shadow-md border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 hover:shadow-lg transition-all duration-300 hover:scale-110"
+              >
+                <img
+                  src={icon}
+                  alt="Tech icon"
+                  className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-11 xl:h-11 object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* What We Offer */}
+        <div className="mt-3 sm:mt-4 md:mt-6">
+          <h4 className="font-sans text-[10px] sm:text-xs md:text-base font-bold uppercase tracking-wider text-[#1CA7B8] mb-1.5 sm:mb-2 md:mb-3">
+            What We Offer
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
+            {service.offerings.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-start gap-1.5 sm:gap-2 md:gap-2.5 p-1 sm:p-1.5 md:p-2 rounded-lg hover:bg-[#F2FAFB] transition-colors duration-300 group/item"
+              >
+                <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-transform group-hover/item:scale-110" />
+                <span className="font-sans text-[10px] sm:text-xs md:text-base text-black">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative gradient line */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-b-xl sm:rounded-b-2xl md:rounded-b-3xl" />
+    </motion.div>
+  );
+}
+
+export default function ServicesDetail() {
   return (
     <section className="bg-[#F2FAFB] py-8 sm:py-12 md:py-16 lg:py-20">
       <div className="max-w-8xl mx-auto px-4 sm:px-4 md:px-6 lg:px-8">
@@ -282,94 +370,10 @@ export default function ServicesDetail() {
         </div>
 
         {/* Services List */}
-        <div ref={ref} className="space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16">
-          {servicesData.map((service, index) => {
-            const isEven = index % 2 === 0;
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: index * 0.1 }}
-                className={`relative flex flex-col ${
-                  isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-[#0E2A43]/5 hover:border-[#1CA7B8]/20 group`}
-              >
-                {/* Image */}
-                <div className="flex-shrink-0 w-full lg:w-2/5">
-                  <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-[#F2FAFB]">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-72 lg:max-h-80 xl:max-h-96 object-contain transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 sm:top-4 md:top-5 right-3 sm:right-2 md:right-3 bg-[#0E2A43]/80 backdrop-blur-sm text-white text-[12px] sm:text-lg font-bold px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full">
-                      {String(service.id).padStart(2, '0')}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 w-full">
-                  <h3 className="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0E2A43]">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="mt-1 sm:mt-2 font-sans text-base sm:text-lg md:text-xl font-semibold text-[#1CA7B8]">
-                    {service.subtitle}
-                  </p>
-                  
-                  <p className="mt-2 sm:mt-3 md:mt-4 font-sans text-xs sm:text-sm md:text-base lg:text-lg text-black/90 leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  {/* Technology Icons - Larger & Responsive */}
-                  <div className="mt-3 sm:mt-4 md:mt-6">
-                    <h4 className="font-sans text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black mb-1.5 sm:mb-2 md:mb-3">
-                      Technologies We Use
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
-                      {service.techIcons.map((icon, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-white rounded-md sm:rounded-lg md:rounded-xl shadow-md border border-[#0E2A43]/5 hover:border-[#1CA7B8]/30 hover:shadow-lg transition-all duration-300 hover:scale-110"
-                        >
-                          <img
-                            src={icon}
-                            alt="Tech icon"
-                            className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-11 xl:h-11 object-contain"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* What We Offer */}
-                  <div className="mt-3 sm:mt-4 md:mt-6">
-                    <h4 className="font-sans text-[10px] sm:text-xs md:text-base font-bold uppercase tracking-wider text-[#1CA7B8] mb-1.5 sm:mb-2 md:mb-3">
-                      What We Offer
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
-                      {service.offerings.map((item, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-start gap-1.5 sm:gap-2 md:gap-2.5 p-1 sm:p-1.5 md:p-2 rounded-lg hover:bg-[#F2FAFB] transition-colors duration-300 group/item"
-                        >
-                          <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 text-[#1CA7B8] flex-shrink-0 mt-0.5 transition-transform group-hover/item:scale-110" />
-                          <span className="font-sans text-[10px] sm:text-xs md:text-base text-black">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Decorative gradient line */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-[#1CA7B8] to-[#0E2A43] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-b-xl sm:rounded-b-2xl md:rounded-b-3xl" />
-              </motion.div>
-            );
-          })}
+        <div className="space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16">
+          {servicesData.map((service, index) => (
+            <ServiceCard key={service.id} service={service} index={index} />
+          ))}
         </div>
 
         {/* Bottom CTA */}

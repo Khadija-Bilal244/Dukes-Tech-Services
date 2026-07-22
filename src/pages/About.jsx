@@ -4,6 +4,7 @@ import AboutDukes from "../components/About-Dukes.jsx";
 import AboutMission from "../components/About-Mission.jsx";
 import AboutVision from "../components/About-Vision.jsx";
 import AboutValues from "../components/About-Values.jsx";
+import DigitalEcosystem from "../components/DigitalEcoSystem.jsx";
 export default function About() {
   return (
     <>
@@ -14,6 +15,7 @@ export default function About() {
 
       <AboutHero/>
       <AboutDukes/>
+      <DigitalEcosystem/>
       <AboutVision/>
       <AboutMission/>
       <AboutValues/>
