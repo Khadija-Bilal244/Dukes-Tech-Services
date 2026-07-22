@@ -42,7 +42,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/dukestechservices",
+    href: "https://www.instagram.com/dukes_techservices/",
     icon: FaInstagram,
   },
   {
