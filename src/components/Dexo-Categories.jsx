@@ -1,7 +1,6 @@
 // DexoCategories.jsx - DEXO POS & ERP Categories with Forced Dark Mode
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { 
   Cloud, 
   WifiOff, 
@@ -58,7 +57,8 @@ import {
   Clock as ClockIcon,
   AlertCircle,
   Shield as ShieldIcon,
-  FileText as FileTextIcon
+  FileText as FileTextIcon,
+  Search
 } from "lucide-react";
 import dexoLogo from "../assets/dexologo.png";
 import accountingImg from "../assets/accounting & finance.png";
@@ -374,7 +374,7 @@ const dexoSidebarColorMap = {
   employee: "bg-green-500",
   purchases: "bg-orange-500",
   inventory: "bg-purple-500",
-  sales: "bg-amber-700",
+  sales: "bg-red-500",
   bank: "bg-yellow-500",
   gym: "bg-pink-500",
   exit: "bg-red-700"
@@ -448,14 +448,15 @@ const dexoSidebarModulesData = [
       "Category & product management",
       "Low stock auto-alerts (≤5 items)",
       "Barcode support",
-      "Bulk import/export"
+      "Bulk import/export",
+      "Status tracking (Active/Reorder)"
     ]
   },
   {
     id: "sales",
     title: "SALES",
-    color: "amber",
-    sidebarColor: "bg-amber-700",
+    color: "red",
+    sidebarColor: "bg-red-500",
     description: "POS checkout and transaction processing",
     image: smartPosImg,
     features: [
@@ -549,7 +550,8 @@ const dexoSidebarAdminPanelModules = [
     features: [
       "Save firm details to database",
       "Load existing data",
-      "Clear all fields"
+      "Clear all fields",
+      "Generate historical reports(PDF)"
     ]
   },
   {
@@ -593,7 +595,8 @@ const dexoSidebarAdminPanelModules = [
     features: [
       "Active order monitoring",
       "9-stage production lifecycle",
-      "Real-time status tracking"
+      "Real-time status tracking",
+      "Documentation actions in single PDF"
     ]
   }
 ];
@@ -638,7 +641,7 @@ const dexoSidebarGymSubModules = [
 // DEXO MODULE CARD COMPONENTS
 // ============================================================
 
-function DexoModuleCard({ module, inView, index }) {
+function DexoModuleCard({ module, index }) {
   const IconMap = {
     home: Home,
     admin: Settings,
@@ -671,35 +674,33 @@ function DexoModuleCard({ module, inView, index }) {
           <img
             src={module.image}
             alt={module.title}
-            className="w-full h-36 sm:h-40 object-contain transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
           />
-          {/* BADGE WITH SIDEBAR COLOR - LIKE GYM */}
           <div className={`absolute top-2 right-2 ${dexoSidebarColorMap[module.id]} px-3 py-1 rounded-full shadow-lg`}>
             <span className="text-xs font-bold text-white tracking-wider">{module.title}</span>
           </div>
-          {/* Color bar at bottom */}
           <div className={`absolute bottom-0 left-0 right-0 h-1 ${dexoSidebarColorMap[module.id]}`} />
         </div>
       )}
 
       <div className="p-4 sm:p-5">
-        <div className="flex items-center gap-3 mb-2">
-          <div className={`inline-flex h-8 w-8 items-center justify-center rounded-lg ${styles.badge}`}>
+        <div className="flex items-center gap-3 mb-2 min-w-0">
+          <div className={`inline-flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 ${styles.badge}`}>
             <Icon className="h-4 w-4" />
           </div>
-          <div>
-            <h4 className={`font-sans font-bold text-base text-white ${styles.light}`}>
+          <div className="min-w-0">
+            <h4 className={`font-sans font-bold text-base text-white break-words ${styles.light}`}>
               {module.title}
             </h4>
           </div>
         </div>
-        <p className="font-sans text-sm text-white/60 mb-3">{module.description}</p>
+        <p className="font-sans text-lg text-white/80 mb-3">{module.description}</p>
         {module.features && (
           <ul className="space-y-1">
-            {module.features.slice(0, 3).map((feature, idx) => (
+            {module.features.slice(0, 4).map((feature, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <CheckCircle className={`h-3 w-3 ${styles.light} flex-shrink-0 mt-0.5`} />
-                <span className="font-sans text-xs text-white/70">{feature}</span>
+                <CheckCircle className={`h-4 w-4 ${styles.light} flex-shrink-0 mt-0.5`} />
+                <span className="font-sans text-base text-white/70">{feature}</span>
               </li>
             ))}
           </ul>
@@ -709,7 +710,7 @@ function DexoModuleCard({ module, inView, index }) {
   );
 }
 
-function DexoAdminPanelCard({ module, inView, index }) {
+function DexoAdminPanelCard({ module, index }) {
   const styles = accentStyles.cyan;
 
   return (
@@ -729,7 +730,7 @@ function DexoAdminPanelCard({ module, inView, index }) {
           <img
             src={module.image}
             alt={module.title}
-            className="w-full h-36 sm:h-40 object-contain transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-2 right-2 bg-cyan-500 px-3 py-1 rounded-full shadow-lg">
             <span className="text-xs font-bold text-white tracking-wider">Admin</span>
@@ -741,12 +742,12 @@ function DexoAdminPanelCard({ module, inView, index }) {
         <h4 className={`font-sans font-bold text-sm sm:text-base text-white ${styles.light}`}>
           {module.title}
         </h4>
-        <p className="font-sans text-sm text-white/50 mb-2">{module.description}</p>
+        <p className="font-sans text-lg text-white/90 mb-2">{module.description}</p>
         <ul className="space-y-1">
-          {module.features.slice(0, 3).map((feature, idx) => (
+          {module.features.slice(0, 4).map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <CheckCircle className={`h-3 w-3 ${styles.light} flex-shrink-0 mt-0.5`} />
-              <span className="font-sans text-xs text-white/60">{feature}</span>
+              <CheckCircle className={`h-4 w-4 ${styles.light} flex-shrink-0 mt-0.5`} />
+              <span className="font-sans text-base text-white/70">{feature}</span>
             </li>
           ))}
         </ul>
@@ -755,7 +756,7 @@ function DexoAdminPanelCard({ module, inView, index }) {
   );
 }
 
-function DexoGymSubModuleCard({ module, inView, index }) {
+function DexoGymSubModuleCard({ module, index }) {
   const styles = accentStyles.pink;
 
   return (
@@ -775,7 +776,7 @@ function DexoGymSubModuleCard({ module, inView, index }) {
           <img
             src={module.image}
             alt={module.title}
-            className="w-full h-36 sm:h-40 object-contain transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-2 right-2 bg-pink-500 px-3 py-1 rounded-full shadow-lg">
             <span className="text-xs font-bold text-white tracking-wider">Gym</span>
@@ -787,12 +788,12 @@ function DexoGymSubModuleCard({ module, inView, index }) {
         <h4 className={`font-sans font-bold text-sm sm:text-base text-white ${styles.light}`}>
           {module.title}
         </h4>
-        <p className="font-sans text-sm text-white/50 mb-2">{module.description}</p>
+        <p className="font-sans text-lg text-white/90 mb-2">{module.description}</p>
         <ul className="space-y-1">
-          {module.features.slice(0, 3).map((feature, idx) => (
+          {module.features.slice(0, 4).map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <CheckCircle className={`h-3 w-3 ${styles.light} flex-shrink-0 mt-0.5`} />
-              <span className="font-sans text-xs text-white/60">{feature}</span>
+              <CheckCircle className={`h-4 w-4 ${styles.light} flex-shrink-0 mt-0.5`} />
+              <span className="font-sans text-base text-white/70">{feature}</span>
             </li>
           ))}
         </ul>
@@ -802,10 +803,225 @@ function DexoGymSubModuleCard({ module, inView, index }) {
 }
 
 // ============================================================
+// INVENTORY MANAGEMENT SYSTEM DETAIL SECTION - CONSISTENT STYLE
+// ============================================================
+
+function InventoryManagementSection() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4, duration: 0.6 }}
+      className="mb-12"
+    >
+      <div className="flex items-center gap-3 mb-5">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-purple-500/30" />
+        <h3 className="font-sans text-base sm:text-lg font-bold text-white/80">Inventory Management System</h3>
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-purple-500/30" />
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        {/* Card 1: Category Management */}
+        <div className="group bg-[#0e1f3a] rounded-xl sm:rounded-2xl overflow-hidden border border-[#1a3a5a] 
+          hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 
+          hover:shadow-xl hover:shadow-purple-500/10"
+        >
+          <div className="relative overflow-hidden bg-[#0a1628]">
+            <img
+              src={manageCategoryImg}
+              alt="Category Management"
+              className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-2 right-2 bg-purple-500 px-3 py-1 rounded-full shadow-lg">
+              <span className="text-xs font-bold text-white tracking-wider">Inventory</span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-purple-500" />
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center gap-3 mb-2 min-w-0">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 bg-purple-500/20 text-purple-400">
+                <Layers className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-sans font-bold text-base text-white break-words text-purple-300">
+                  Category Management
+                </h4>
+              </div>
+            </div>
+            <p className="font-sans text-lg text-white/80 mb-3">Manage organizational folders</p>
+            <ul className="space-y-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Manage Categories (Add, Delete, Clear)
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card 2: Product Parameters */}
+        <div className="group bg-[#0e1f3a] rounded-xl sm:rounded-2xl overflow-hidden border border-[#1a3a5a] 
+          hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 
+          hover:shadow-xl hover:shadow-purple-500/10"
+        >
+          <div className="relative overflow-hidden bg-[#0a1628]">
+            <img
+              src={manageCategoryImg}
+              alt="Product Parameters"
+              className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-2 right-2 bg-purple-500 px-3 py-1 rounded-full shadow-lg">
+              <span className="text-xs font-bold text-white tracking-wider">Inventory</span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-purple-500" />
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center gap-3 mb-2 min-w-0">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 bg-purple-500/20 text-purple-400">
+                <Barcode className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-sans font-bold text-base text-white break-words text-purple-300">
+                  Product Parameters
+                </h4>
+              </div>
+            </div>
+            <p className="font-sans text-lg text-white/80 mb-3">Fields include</p>
+            <ul className="space-y-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Category, Product Name, Barcode (Optional)
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Cost Price, Retail Price, Margin, Product ID
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Discount (Optional)
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card 3: System Logic Triggers */}
+        <div className="group bg-[#0e1f3a] rounded-xl sm:rounded-2xl overflow-hidden border border-[#1a3a5a] 
+          hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 
+          hover:shadow-xl hover:shadow-purple-500/10"
+        >
+          <div className="relative overflow-hidden bg-[#0a1628]">
+            <img
+              src={manageCategoryImg}
+              alt="System Logic"
+              className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-2 right-2 bg-purple-500 px-3 py-1 rounded-full shadow-lg">
+              <span className="text-xs font-bold text-white tracking-wider">Inventory</span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-purple-500" />
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center gap-3 mb-2 min-w-0">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 bg-purple-500/20 text-purple-400">
+                <Zap className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-sans font-bold text-base text-white break-words text-purple-300">
+                  System Logic Triggers
+                </h4>
+              </div>
+            </div>
+            <p className="font-sans text-lg text-white/80 mb-3">Automated system logic</p>
+            <ul className="space-y-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Status: Active / Reorder states
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Quantity ≤ 5 auto-sets to <span className="text-yellow-400 font-semibold">'Reorder'</span>
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <AlertCircle className="h-4 w-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Low Stock Indicator: Yellow notification card
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card 4: Grid Actions */}
+        <div className="group bg-[#0e1f3a] rounded-xl sm:rounded-2xl overflow-hidden border border-[#1a3a5a] 
+          hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 
+          hover:shadow-xl hover:shadow-purple-500/10"
+        >
+          <div className="relative overflow-hidden bg-[#0a1628]">
+            <img
+              src={manageCategoryImg}
+              alt="Grid Actions"
+              className="w-full h-48 sm:h-56 object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute top-2 right-2 bg-purple-500 px-3 py-1 rounded-full shadow-lg">
+              <span className="text-xs font-bold text-white tracking-wider">Inventory</span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-purple-500" />
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center gap-3 mb-2 min-w-0">
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0 bg-purple-500/20 text-purple-400">
+                <FileTextIcon className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-sans font-bold text-base text-white break-words text-purple-300">
+                  Grid Actions
+                </h4>
+              </div>
+            </div>
+            <p className="font-sans text-lg text-white/80 mb-3">Inventory record management</p>
+            <ul className="space-y-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Search - Filter inventory records
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Import - Bulk update records
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-4 w-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                <span className="font-sans text-base text-white/70">
+                  Print PDF - Physical audits
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ============================================================
 // MAIN ERP CATEGORY BLOCK
 // ============================================================
 
-function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
+function ModuleCategoryBlock({ category, catIndex, activeTab }) {
   const { title, icon: HeaderIcon, accent, modules, cols, image, imagePosition } = category;
   const styles = accentStyles[accent];
   const [isExpanded, setIsExpanded] = useState(false);
@@ -875,16 +1091,16 @@ function ModuleCategoryBlock({ category, inView, catIndex, activeTab }) {
           </motion.div>
         )}
         
-        <div className={`flex-1 flex flex-col justify-center ${align.titleSection}`}>
-          <div className={`flex items-center gap-3 mb-2 ${align.titleFlex}`}>
-            <div className={`inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl ${styles.badge} ${align.badge}`}>
+        <div className={`flex-1 min-w-0 flex flex-col justify-center ${align.titleSection}`}>
+          <div className={`flex items-center gap-3 mb-2 min-w-0 ${align.titleFlex}`}>
+            <div className={`inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl flex-shrink-0 ${styles.badge} ${align.badge}`}>
               <HeaderIcon className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h4 className="font-sans text-xl sm:text-2xl md:text-3xl font-bold text-white transition-colors duration-300">
+            <h4 className="font-sans text-xl sm:text-2xl md:text-3xl font-bold text-white transition-colors duration-300 break-words">
               {title}
             </h4>
           </div>
-          <div className={`flex items-center gap-4 mt-1 ${align.featureBadge}`}>
+          <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 ${align.featureBadge}`}>
             <span className="font-sans text-sm sm:text-base font-semibold uppercase tracking-wider text-white/60">
               {modules.length} Features
             </span>
@@ -964,10 +1180,6 @@ const offlineBenefits = [
 
 export default function DexoCategories() {
   const [activeTab, setActiveTab] = useState("online");
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
 
   const features = activeTab === "online" ? posFeatures.online : posFeatures.offline;
   const benefits = activeTab === "online" ? onlineBenefits : offlineBenefits;
@@ -982,7 +1194,7 @@ export default function DexoCategories() {
         
         {/* Header - Always Dark */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-          <div className="flex items-center justify-center gap-3 sm:gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5">
             <motion.img 
               src={dexoLogo} 
               alt="DEXO Logo" 
@@ -1036,7 +1248,7 @@ export default function DexoCategories() {
         </div>
 
         {/* POS Features Grid - Always Dark */}
-        <div ref={ref} className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16">
           <motion.div
             key={`features-${activeTab}`}
             initial={{ opacity: 0, y: 20 }}
@@ -1108,6 +1320,7 @@ export default function DexoCategories() {
 
         {/* ============================================================ */}
         {/* DEXO SOFTWARE SUITE MODULES - ONLY SHOW ON OFFLINE TAB */}
+        {/* 2 COLUMNS ON DESKTOP, 1 COLUMN ON MOBILE */}
         {/* ============================================================ */}
         {activeTab === "offline" && (
           <div className="mt-20 sm:mt-24">
@@ -1122,53 +1335,58 @@ export default function DexoCategories() {
                 <span className="inline-block h-1 w-12 rounded-full bg-[#1CA7B8]" />
                 <span className="inline-block h-1 w-6 rounded-full bg-[#1CA7B8]/30" />
               </div>
-              <p className="mt-4 text-white/60 max-w-3xl mx-auto font-sans text-base sm:text-lg leading-relaxed">
+              <p className="mt-4 text-white/90 max-w-3xl mx-auto font-sans text-base sm:text-lg leading-relaxed">
                 Enterprise-grade Point of Sale solution designed to centralise business operations, 
                 ensure financial integrity, and provide real-time data visibility across all modules.
               </p>
             </div>
 
-            {/* Navigation Modules Grid */}
+            {/* Navigation Modules Grid - 2 COLUMNS ON DESKTOP, 1 ON MOBILE */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#1CA7B8]/30" />
-                <h3 className="font-sans text-base sm:text-lg font-bold text-white/80">Colour-Coded Navigation Modules</h3>
+                <h3 className="font-sans text-base sm:text-lg font-bold text-white/90">Colour-Coded Navigation Modules</h3>
                 <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#1CA7B8]/30" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {dexoSidebarModulesData.map((module, index) => (
-                  <DexoModuleCard key={module.id} module={module} inView={inView} index={index} />
+                  <DexoModuleCard key={module.id} module={module} index={index} />
                 ))}
               </div>
             </div>
 
-            {/* Admin Panel Modules */}
+            {/* Admin Panel Modules - 2 COLUMNS ON DESKTOP, 1 ON MOBILE */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent to-cyan-500/30" />
                 <h3 className="font-sans text-base sm:text-lg font-bold text-white/80">Admin Panel Modules</h3>
                 <div className="h-px flex-1 bg-gradient-to-l from-transparent to-cyan-500/30" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {dexoSidebarAdminPanelModules.map((module, index) => (
-                  <DexoAdminPanelCard key={module.id} module={module} inView={inView} index={index} />
+                  <DexoAdminPanelCard key={module.id} module={module} index={index} />
                 ))}
               </div>
             </div>
 
-            {/* Gym Sub-Modules */}
+            {/* Gym Sub-Modules - 2 COLUMNS ON DESKTOP, 1 ON MOBILE */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent to-pink-500/30" />
                 <h3 className="font-sans text-base sm:text-lg font-bold text-white/80">Gym Management Sub-Modules</h3>
                 <div className="h-px flex-1 bg-gradient-to-l from-transparent to-pink-500/30" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {dexoSidebarGymSubModules.map((module, index) => (
-                  <DexoGymSubModuleCard key={module.id} module={module} inView={inView} index={index} />
+                  <DexoGymSubModuleCard key={module.id} module={module} index={index} />
                 ))}
               </div>
             </div>
+
+            {/* ============================================================ */}
+            {/* INVENTORY MANAGEMENT SYSTEM DETAIL SECTION */}
+            {/* ============================================================ */}
+            <InventoryManagementSection />
 
             {/* Key Features Highlight */}
             <motion.div
@@ -1283,7 +1501,6 @@ export default function DexoCategories() {
               <ModuleCategoryBlock
                 key={`${category.title}-${activeTab}`}
                 category={category}
-                inView={inView}
                 catIndex={catIndex}
                 activeTab={activeTab}
               />
